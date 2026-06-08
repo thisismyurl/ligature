@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ligature — Theme Previews</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f8f8;
+      color: #1a1a1a;
+      padding: 2.5rem 1.5rem;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid #1a1a1a; }
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; }
+    .tagline { margin-top: 0.4rem; color: #555; font-size: 0.95rem; }
+    .meta { margin-top: 0.75rem; font-size: 0.8rem; color: #888; }
+    .meta a { color: inherit; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .card:hover { border-color: #1a1a1a; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      background: #eee;
+    }
+    .card-body { padding: 0.75rem 1rem 0.9rem; }
+    .card-title { font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+    .card-note { margin-top: 0.25rem; font-size: 0.75rem; color: #777; }
+    .badge {
+      font-size: 0.65rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 20px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Ligature</h1>
+      <p class="tagline">A typography studio theme for brand identity agencies, lettering artists, and design studios. Newsreader + DM Sans.</p>
+      <p class="meta">
+        <a href="https://github.com/thisismyurl/colophon-ligature">github.com/thisismyurl/colophon-ligature</a>
+        &nbsp;·&nbsp;
+        <a href="https://thisismyurl.com/ligature/">thisismyurl.com/ligature/</a>
+      </p>
+    </header>
+    <div class="grid">
+
+    <a class="card" href="01-front-page.html">
+      <img src="screenshots/01-front-page-wporg.webp" alt="Front Page preview"
+           onerror="this.onerror=null;this.src='screenshots/01-front-page-wporg.png'">
+      <div class="card-body">
+        <div class="card-title">Front Page <span class="badge" style="background:#0073aa;color:#fff">WP.org</span></div>
+        <div class="card-note">WP.org submission — 1200×900</div>
+      </div>
+    </a>
+
+    <a class="card" href="00-elements.html">
+      <img src="screenshots/00-elements.webp" alt="Elements preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/00-elements.png'">
+      <div class="card-body">
+        <div class="card-title">Elements <span class="badge" style="background:#555;color:#fff">tokens</span></div>
+        <div class="card-note">Palette, type scale, components</div>
+      </div>
+    </a>
+
+    <a class="card" href="02-studio.html">
+      <img src="screenshots/02-studio.webp" alt="Studio preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/02-studio.png'">
+      <div class="card-body">
+        <div class="card-title">Studio</div>
+        <div class="card-note">Bio, credentials, process</div>
+      </div>
+    </a>
+
+    <a class="card" href="03-work-grid.html">
+      <img src="screenshots/03-work-grid.webp" alt="Work Grid preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/03-work-grid.png'">
+      <div class="card-body">
+        <div class="card-title">Work Grid</div>
+        <div class="card-note">Portfolio — six case studies</div>
+      </div>
+    </a>
+
+    <a class="card" href="04-case-study.html">
+      <img src="screenshots/04-case-study.webp" alt="Case Study preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/04-case-study.png'">
+      <div class="card-body">
+        <div class="card-title">Case Study</div>
+        <div class="card-note">Problem · Solution · Outcome</div>
+      </div>
+    </a>
+
+    <a class="card" href="05-contact.html">
+      <img src="screenshots/05-contact.webp" alt="Contact preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/05-contact.png'">
+      <div class="card-body">
+        <div class="card-title">Contact</div>
+        <div class="card-note">Start-a-project brief form</div>
+      </div>
+    </a>
+
+    <a class="card" href="06-journal-post.html">
+      <img src="screenshots/06-journal-post.webp" alt="Journal Post preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/06-journal-post.png'">
+      <div class="card-body">
+        <div class="card-title">Journal Post</div>
+        <div class="card-note">Long-form essay</div>
+      </div>
+    </a>
+
+    <a class="card" href="07-front-mobile.html">
+      <img src="screenshots/07-front-mobile-375.webp" alt="Front — 375px preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/07-front-mobile-375.png'">
+      <div class="card-body">
+        <div class="card-title">Front — 375px <span class="badge" style="background:#2e7d32;color:#fff">mobile</span></div>
+        <div class="card-note">Mobile front page</div>
+      </div>
+    </a>
+
+    <a class="card" href="08-work-mobile.html">
+      <img src="screenshots/08-work-mobile-390.webp" alt="Work — 390px preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/08-work-mobile-390.png'">
+      <div class="card-body">
+        <div class="card-title">Work — 390px <span class="badge" style="background:#2e7d32;color:#fff">mobile</span></div>
+        <div class="card-note">Mobile work grid</div>
+      </div>
+    </a>
+
+    <a class="card" href="09-proof.html">
+      <img src="screenshots/09-proof.webp" alt="Proof variation preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/09-proof.png'">
+      <div class="card-body">
+        <div class="card-title">Proof <span class="badge" style="background:#6a1b9a;color:#fff">variation</span></div>
+        <div class="card-note">Warm paper · gold signal</div>
+      </div>
+    </a>
+
+    <a class="card" href="10-leaded.html">
+      <img src="screenshots/10-leaded.webp" alt="Leaded variation preview" loading="lazy"
+           onerror="this.onerror=null;this.src='screenshots/10-leaded.png'">
+      <div class="card-body">
+        <div class="card-title">Leaded <span class="badge" style="background:#6a1b9a;color:#fff">variation</span></div>
+        <div class="card-note">Dark ink ground · brass signal</div>
+      </div>
+    </a>
+
+    </div>
+  </div>
+</body>
+</html>

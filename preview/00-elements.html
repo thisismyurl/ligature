@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Ligature — Elements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ligature-preview.css">
+<style>
+  .lig-swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--wp--preset--spacing--4); }
+  .lig-swatch { display: flex; flex-direction: column; gap: 0.4rem; }
+  .lig-swatch-chip { aspect-ratio: 3/2; border: 1px solid var(--wp--preset--color--lig-rule); }
+  .lig-swatch-label { font-family: var(--wp--preset--font-family--dm-sans); font-size: var(--wp--preset--font-size--2xs); letter-spacing: 0.04em; color: var(--wp--preset--color--lig-muted); }
+  .lig-scale-row { display: flex; align-items: baseline; gap: var(--wp--preset--spacing--6); padding-block: var(--wp--preset--spacing--3); border-bottom: 1px solid var(--wp--preset--color--lig-rule); }
+  .lig-scale-tag { font-family: var(--wp--preset--font-family--dm-sans); font-size: var(--wp--preset--font-size--2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--wp--preset--color--lig-muted); width: 80px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="lig-site">
+
+  <header class="lig-header">
+    <a class="lig-wordmark" href="#">Ligature</a>
+    <nav class="lig-nav">
+      <a href="#">Work</a>
+      <a href="#">Studio</a>
+      <a href="#">Journal</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="lig-main">
+
+    <section class="lig-band--paper lig-section" style="padding-bottom: var(--wp--preset--spacing--8);">
+      <div class="lig-constrained">
+        <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Design System</p>
+        <h2>Elements &amp; tokens</h2>
+      </div>
+    </section>
+
+    <!-- Colour palette -->
+    <section class="lig-band--paper lig-section" style="padding-top: 0;">
+      <div class="lig-constrained">
+        <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Palette</p>
+        <div class="lig-swatch-grid">
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-paper);"></div><span class="lig-swatch-label">Paper · #F7F6F3</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-ink);"></div><span class="lig-swatch-label">Ink · #141413</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-secondary);"></div><span class="lig-swatch-label">Secondary · #4A4845</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-muted);"></div><span class="lig-swatch-label">Muted · #8C8985</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-rule);"></div><span class="lig-swatch-label">Rule · #D4D1CB</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-surface);"></div><span class="lig-swatch-label">Surface · #EFEDE9</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-signal);"></div><span class="lig-swatch-label">Signal · #1A56D6</span></div>
+          <div class="lig-swatch"><div class="lig-swatch-chip" style="background: var(--wp--preset--color--lig-signal-tint);"></div><span class="lig-swatch-label">Signal Tint · #EBF0FB</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Type scale -->
+    <section class="lig-band--surface lig-section">
+      <div class="lig-constrained">
+        <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Type Scale — Newsreader + DM Sans</p>
+        <div class="lig-scale-row"><span class="lig-scale-tag">Display</span><span style="font-family: var(--wp--preset--font-family--newsreader); font-size: var(--wp--preset--font-size--3xl); letter-spacing: -0.025em;">Typography that holds meaning</span></div>
+        <div class="lig-scale-row"><span class="lig-scale-tag">H2 / 3xl</span><span style="font-family: var(--wp--preset--font-family--newsreader); font-size: var(--wp--preset--font-size--2xl); letter-spacing: -0.02em;">A small studio, a long view</span></div>
+        <div class="lig-scale-row"><span class="lig-scale-tag">H3 / xl</span><span style="font-family: var(--wp--preset--font-family--dm-sans); font-size: var(--wp--preset--font-size--lg); font-weight: 500;">Understand the voice first</span></div>
+        <div class="lig-scale-row"><span class="lig-scale-tag">Body</span><span style="font-family: var(--wp--preset--font-family--dm-sans); font-size: var(--wp--preset--font-size--base);">The work begins with reading, before a single glyph is drawn.</span></div>
+        <div class="lig-scale-row"><span class="lig-scale-tag">Overline</span><span class="is-style-lig-overline">Brand Identity · Type Direction</span></div>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="lig-band--paper lig-section">
+      <div class="lig-constrained">
+        <div class="lig-cols-50-50" style="align-items: start;">
+          <div>
+            <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Buttons &amp; quote</p>
+            <p style="margin-bottom: var(--wp--preset--spacing--6);"><a class="lig-btn" href="#">Send the brief</a></p>
+            <blockquote class="lig-quote">The masthead finally sounds like the magazine.</blockquote>
+          </div>
+          <div>
+            <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Credential list</p>
+            <ul class="lig-credential-list">
+              <li>Type Directors Club — Certificate of Excellence</li>
+              <li>D&amp;AD Wood Pencil — Brand Identity</li>
+              <li>Communication Arts Typography Annual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="lig-footer">
+    <div class="lig-footer-row">
+      <div class="lig-footer-name">Ligature</div>
+      <div class="lig-footer-contact"><a href="#">studio@ligature.type</a></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- Page template for Ligature.
+     Standard WordPress page: About, Services, Contact, etc.
+     Content constrained to 720px for readable prose.
+     No featured image by default — page editors opt in via block editor
+     controls if the page needs one. -->
+
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-page","layout":{"type":"constrained","contentSize":"720px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|20","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}}} -->
+<main id="main-content" class="wp-block-group ligature-main ligature-page" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
+
+	<!-- wp:post-title {"level":1,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"300","fontSize":"var:preset|font-size|display","letterSpacing":"-0.02em","lineHeight":"1.05"},"color":{"text":"var:preset|color|lig-ink"},"spacing":{"margin":{"bottom":"var:preset|spacing|10"}}}} /-->
+
+	<!-- wp:post-content {"layout":{"type":"constrained","contentSize":"720px"}} /-->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

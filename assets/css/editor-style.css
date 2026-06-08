@@ -1,0 +1,35 @@
+/* =====================================================================
+   [SKIN] editor-style.css — block editor personality layer.
+   ---------------------------------------------------------------------
+   The block editor loads theme.json for tokens and global styles. This
+   file carries only the ::before/::after treatments and custom block
+   styles that theme.json cannot express (block-style labels, pattern
+   previews, editor-only affordances).
+
+   Keep this file lean. If something can be expressed in theme.json,
+   it belongs there — not here. This file is the last resort, not the
+   first tool.
+   ===================================================================== */
+
+/* Mirror the ligature-eyebrow component for the editor preview */
+.editor-styles-wrapper .is-style-ligature-eyebrow {
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #6b6b68;
+}
+
+/* Mirror the annotation style */
+.editor-styles-wrapper .is-style-ligature-annotation {
+	font-size: 0.75rem;
+	letter-spacing: 0.06em;
+	color: #6b6b68;
+}
+
+/* Directory entry: top rule visible in editor */
+.editor-styles-wrapper .is-style-ligature-directory-entry {
+	border-top: 1px solid #d6d3cc;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}

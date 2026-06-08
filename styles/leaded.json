@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Leaded",
+  "settings": {
+    "custom": {
+      "colophon-light": "#141210",
+      "colophon-dark": "#e4e0d8",
+      "colophon-accent": "#c8a830"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "lig-paper",
+          "color": "#141210",
+          "name": "Lig Paper"
+        },
+        {
+          "slug": "lig-ink",
+          "color": "#e4e0d8",
+          "name": "Lig Ink"
+        },
+        {
+          "slug": "lig-secondary",
+          "color": "#c8c4bc",
+          "name": "Lig Secondary"
+        },
+        {
+          "slug": "lig-muted",
+          "color": "#8a8680",
+          "name": "Lig Muted"
+        },
+        {
+          "slug": "lig-rule",
+          "color": "#2a2824",
+          "name": "Lig Rule"
+        },
+        {
+          "slug": "lig-surface",
+          "color": "#1e1c18",
+          "name": "Lig Surface"
+        },
+        {
+          "slug": "lig-overlay",
+          "color": "#242220",
+          "name": "Lig Overlay"
+        },
+        {
+          "slug": "lig-signal",
+          "color": "#c8a830",
+          "name": "Lig Signal"
+        },
+        {
+          "slug": "lig-signal-tint",
+          "color": "#2a2418",
+          "name": "Lig Signal Tint"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--lig-rule)",
+      "text": "var(--wp--preset--color--lig-paper)"
+    }
+  }
+}

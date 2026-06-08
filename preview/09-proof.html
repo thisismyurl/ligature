@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Ligature — Proof (Warm Variation)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ligature-preview.css">
+<style>
+  /* Proof style variation — warm paper, gold signal.
+     Overrides the palette tokens exactly as styles/proof.json does
+     through settings.color.palette. */
+  :root {
+    --wp--preset--color--lig-paper:       #F8F4EC;
+    --wp--preset--color--lig-ink:         #141210;
+    --wp--preset--color--lig-secondary:   #2A2822;
+    --wp--preset--color--lig-muted:       #6A6456;
+    --wp--preset--color--lig-rule:        #D8D0C0;
+    --wp--preset--color--lig-surface:     #EDE8DC;
+    --wp--preset--color--lig-overlay:     #E4DECE;
+    --wp--preset--color--lig-signal:      #B89420;
+    --wp--preset--color--lig-signal-tint: #F5ECC0;
+  }
+  /* The proof overlay band is light, so footer text inverts to ink */
+  .lig-footer { background: var(--wp--preset--color--lig-overlay); color: var(--wp--preset--color--lig-ink); }
+  .lig-footer-name { color: var(--wp--preset--color--lig-ink); }
+  .lig-footer-contact a { color: var(--wp--preset--color--lig-ink); }
+  .lig-footer-contact a:hover { color: var(--wp--preset--color--lig-signal); }
+  .lig-hero { min-height: 480px; }
+</style>
+</head>
+<body>
+<div class="lig-site">
+
+  <header class="lig-header">
+    <a class="lig-wordmark" href="#">Ligature</a>
+    <nav class="lig-nav">
+      <a href="#">Work</a>
+      <a href="#">Studio</a>
+      <a href="#">Journal</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="lig-main">
+
+    <section class="lig-hero lig-band--paper lig-section">
+      <div class="lig-constrained">
+        <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Style Variation · Proof</p>
+        <h1>Typography that<br>holds meaning.</h1>
+        <hr class="lig-accent-rule">
+        <p style="max-width: 540px; color: var(--wp--preset--color--lig-secondary);">The same studio, set on warm proofing paper with a gold signal accent. One theme, eight ways to speak.</p>
+      </div>
+    </section>
+
+    <section class="lig-band--surface lig-section" style="padding-top: var(--wp--preset--spacing--10); padding-bottom: var(--wp--preset--spacing--10);">
+      <div class="lig-constrained">
+        <div class="lig-section-header" style="margin-bottom: 0;">
+          <h2 class="is-style-lig-overline">Selected Work</h2>
+          <p class="is-style-lig-overline"><a href="#" style="color: var(--wp--preset--color--lig-signal);">All projects &rarr;</a></p>
+        </div>
+        <div>
+          <div class="is-style-lig-directory-entry">
+            <div class="lig-entry-left">
+              <div class="lig-entry-title">Foundry &amp; Field Wordmark</div>
+              <div class="lig-entry-type">Brand Identity</div>
+            </div>
+            <span class="lig-entry-year">2024</span>
+          </div>
+          <div class="is-style-lig-directory-entry">
+            <div class="lig-entry-left">
+              <div class="lig-entry-title">Harbour Review Masthead</div>
+              <div class="lig-entry-type">Type Direction · Editorial</div>
+            </div>
+            <span class="lig-entry-year">2024</span>
+          </div>
+          <div class="is-style-lig-directory-entry">
+            <div class="lig-entry-left">
+              <div class="lig-entry-title">Quartet Press Identity System</div>
+              <div class="lig-entry-type">Brand Identity · Print</div>
+            </div>
+            <span class="lig-entry-year">2023</span>
+          </div>
+          <div class="is-style-lig-directory-entry">
+            <div class="lig-entry-left">
+              <div class="lig-entry-title">The Annex Museum Lettering</div>
+              <div class="lig-entry-type">Custom Lettering · Wayfinding</div>
+            </div>
+            <span class="lig-entry-year">2023</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="lig-footer">
+    <div class="lig-footer-row">
+      <div class="lig-footer-name">Ligature</div>
+      <div class="lig-footer-contact"><a href="#">studio@ligature.type</a></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

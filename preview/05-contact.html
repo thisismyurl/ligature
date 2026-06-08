@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Ligature — Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ligature-preview.css">
+</head>
+<body>
+<div class="lig-site">
+
+  <header class="lig-header">
+    <a class="lig-wordmark" href="#">Ligature</a>
+    <nav class="lig-nav">
+      <a href="#">Work</a>
+      <a href="#">Studio</a>
+      <a href="#">Journal</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="lig-main">
+
+    <section class="lig-band--paper lig-section">
+      <div class="lig-constrained">
+        <div class="lig-cols-40-60">
+
+          <div>
+            <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--5);">Start a project</p>
+            <h2 style="margin-bottom: var(--wp--preset--spacing--6);">Tell us what your words need to do.</h2>
+            <p style="color: var(--wp--preset--color--lig-secondary); margin-bottom: var(--wp--preset--spacing--6);">The studio takes on a small number of identity and type projects each year. A few lines about your organisation and your timeline is enough to start the conversation.</p>
+            <p class="is-style-lig-overline" style="margin-bottom: var(--wp--preset--spacing--3);">Direct</p>
+            <p style="color: var(--wp--preset--color--lig-secondary);"><a href="#">studio@ligature.type</a><br>Toronto &amp; Lisbon</p>
+          </div>
+
+          <div>
+            <form class="lig-brief-form" onsubmit="return false;">
+              <div class="lig-form-row">
+                <div class="lig-field">
+                  <label class="lig-form-label" for="name">Name</label>
+                  <input class="lig-input" type="text" id="name" name="name" autocomplete="name">
+                </div>
+                <div class="lig-field">
+                  <label class="lig-form-label" for="org">Organisation</label>
+                  <input class="lig-input" type="text" id="org" name="org" autocomplete="organization">
+                </div>
+              </div>
+              <div class="lig-field">
+                <label class="lig-form-label" for="email">Email</label>
+                <input class="lig-input" type="email" id="email" name="email" autocomplete="email" inputmode="email">
+              </div>
+              <div class="lig-field">
+                <label class="lig-form-label" for="scope">What do you need?</label>
+                <input class="lig-input" type="text" id="scope" name="scope" placeholder="Wordmark, typeface, editorial system…">
+              </div>
+              <div class="lig-field">
+                <label class="lig-form-label" for="brief">Tell us about it</label>
+                <textarea class="lig-input lig-textarea" id="brief" name="brief"></textarea>
+              </div>
+              <div>
+                <button class="lig-btn" type="submit">Send the brief</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="lig-footer">
+    <div class="lig-footer-row">
+      <div class="lig-footer-name">Ligature</div>
+      <div class="lig-footer-contact"><a href="#">studio@ligature.type</a></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

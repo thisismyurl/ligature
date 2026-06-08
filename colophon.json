@@ -1,0 +1,10 @@
+{
+  "name": "Ligature",
+  "slug": "ligature",
+  "namespace": "Ligature",
+  "prefix": "ligature",
+  "version": "1.158.1749",
+  "colophon_version": "1.158.1749",
+  "is_core": false,
+  "overrides": {}
+}

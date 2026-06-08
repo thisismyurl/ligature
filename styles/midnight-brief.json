@@ -1,0 +1,107 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Midnight Brief",
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "slug": "lig-paper",
+          "color": "#0E0E0F",
+          "name": "Lig Paper"
+        },
+        {
+          "slug": "lig-ink",
+          "color": "#F4F3F0",
+          "name": "Lig Ink"
+        },
+        {
+          "slug": "lig-secondary",
+          "color": "#C8C5C0",
+          "name": "Lig Secondary"
+        },
+        {
+          "slug": "lig-muted",
+          "color": "#7A7770",
+          "name": "Lig Muted"
+        },
+        {
+          "slug": "lig-rule",
+          "color": "#2E2C28",
+          "name": "Lig Rule"
+        },
+        {
+          "slug": "lig-surface",
+          "color": "#1A1A1C",
+          "name": "Lig Surface"
+        },
+        {
+          "slug": "lig-overlay",
+          "color": "#2A2A2E",
+          "name": "Lig Overlay"
+        },
+        {
+          "slug": "lig-signal",
+          "color": "#4A80F0",
+          "name": "Lig Signal"
+        },
+        {
+          "slug": "lig-signal-tint",
+          "color": "#0A1830",
+          "name": "Lig Signal Tint"
+        },
+        {
+          "slug": "lig-white",
+          "color": "#1A1A1E",
+          "name": "Lig White"
+        }
+      ]
+    },
+    "custom": {
+      "colophon-light": "#0E0E0F",
+      "colophon-dark": "#F4F3F0",
+      "colophon-accent": "#4A80F0"
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--lig-paper)",
+      "text": "var(--wp--preset--color--lig-ink)"
+    },
+    "elements": {
+      "heading": {
+        "color": {
+          "text": "var(--wp--preset--color--lig-ink)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--lig-signal)"
+        },
+        ":hover": {
+          "color": {
+            "text": "var(--wp--preset--color--lig-ink)"
+          }
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var(--wp--preset--color--lig-signal)",
+          "text": "var(--wp--preset--color--lig-paper)"
+        }
+      }
+    },
+    "blocks": {
+      "core/site-title": {
+        "color": {
+          "text": "var(--wp--preset--color--lig-ink)"
+        }
+      },
+      "core/navigation": {
+        "color": {
+          "text": "var(--wp--preset--color--lig-secondary)"
+        }
+      }
+    }
+  }
+}

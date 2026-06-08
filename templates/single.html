@@ -1,0 +1,53 @@
+<!-- Single post template for Ligature.
+     The case study layout: a design publication reading experience.
+     Structure: header → post header (title + meta) → featured image →
+     post content → post navigation → footer.
+
+     Typography drives the hierarchy: title at display scale in Fraunces,
+     body at Jakarta 1.7 line-height, pull-quotes in the specimen-display style.
+
+     Pillar 8 (Kodawari): every typographic detail here is intentional — the
+     space above the title, the rule above the meta, the constrained prose width.
+     There are no defaults left unchallenged. -->
+
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-single","layout":{"type":"constrained","contentSize":"720px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|20","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}}} -->
+<main id="main-content" class="wp-block-group ligature-main ligature-single" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
+
+	<!-- Post header: meta → title → excerpt -->
+	<!-- wp:group {"className":"ligature-post-header","style":{"spacing":{"blockGap":"var:preset|spacing|5","padding":{"bottom":"var:preset|spacing|10"}}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group ligature-post-header" style="padding-bottom:var(--wp--preset--spacing--10)">
+
+		<!-- wp:template-part {"slug":"post-meta","tagName":"div"} /-->
+
+		<!-- wp:post-title {"level":1,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"300","fontSize":"var:preset|font-size|display","letterSpacing":"-0.02em","lineHeight":"1.05"},"color":{"text":"var:preset|color|lig-ink"},"spacing":{"margin":{"top":"var:preset|spacing|5"}}}} /-->
+
+	</div>
+	<!-- /wp:group -->
+
+	<!-- Featured image: breaks to wideSize, no border-radius, no caption clutter -->
+	<!-- wp:post-featured-image {"isLink":false,"align":"wide","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|12"}}}} /-->
+
+	<!-- Post content: constrained to 720px, readable line-height -->
+	<!-- wp:post-content {"layout":{"type":"constrained","contentSize":"720px"}} /-->
+
+	<!-- Post navigation: prev ← → next, typeset not buttoned -->
+	<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|12"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"720px"}} -->
+	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--12)">
+
+		<!-- wp:separator {"backgroundColor":"lig-rule","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|8"}}}} -->
+		<hr class="wp-block-separator has-lig-rule-background-color has-background" style="margin-bottom:var(--wp--preset--spacing--8)" />
+		<!-- /wp:separator -->
+
+		<!-- wp:post-navigation-link {"type":"previous","label":"Previous","showTitle":true,"linkLabel":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","fontWeight":"500"},"color":{"text":"var:preset|color|lig-ink"}}} /-->
+
+		<!-- wp:post-navigation-link {"type":"next","label":"Next","showTitle":true,"linkLabel":true,"textAlign":"right","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","fontWeight":"500"},"color":{"text":"var:preset|color|lig-ink"}}} /-->
+
+	</div>
+	<!-- /wp:group -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

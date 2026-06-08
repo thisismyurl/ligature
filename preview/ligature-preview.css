@@ -1,0 +1,642 @@
+/*
+ * ligature-preview.css
+ * Standalone CSS for the Ligature WordPress FSE theme preview pages.
+ * Replicates the WP-generated custom properties from theme.json plus the
+ * theme stylesheets (reset / base / skin) so Playwright can render accurate
+ * screenshots without a live WordPress instance.
+ *
+ * Structure mirrors the theme's @layer declaration order.
+ * Fonts load from Google Fonts CDN (Newsreader + DM Sans, both SIL OFL 1.1).
+ *
+ * Variant pages (09-proof, 10-leaded) override the three colophon anchor
+ * props and the palette tokens inline in their own <style> block — the same
+ * mechanism a Colophon style variation uses via settings.custom.
+ */
+
+/* ================================================================
+   WP PRESET CUSTOM PROPERTIES
+   WordPress injects these inline from theme.json. We declare them
+   as :root custom properties so all CSS references resolve.
+   ================================================================ */
+:root {
+  /* Colour palette — off-white paper, near-black ink, signal blue accent */
+  --wp--preset--color--lig-paper:       #F7F6F3;
+  --wp--preset--color--lig-ink:         #141413;
+  --wp--preset--color--lig-secondary:   #4A4845;
+  --wp--preset--color--lig-muted:       #8C8985;
+  --wp--preset--color--lig-rule:        #D4D1CB;
+  --wp--preset--color--lig-surface:     #EFEDE9;
+  --wp--preset--color--lig-overlay:     #1A1916;
+  --wp--preset--color--lig-signal:      #1A56D6;
+  --wp--preset--color--lig-signal-tint: #EBF0FB;
+  --wp--preset--color--lig-positive:    #2A7A4B;
+  --wp--preset--color--lig-caution:     #B85C1A;
+  --wp--preset--color--lig-white:       #FFFFFF;
+
+  /* Font families */
+  --wp--preset--font-family--newsreader: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --wp--preset--font-family--dm-sans:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Font sizes (fluid clamp scale) */
+  --wp--preset--font-size--2xs:     0.6875rem;
+  --wp--preset--font-size--xs:      clamp(0.75rem, 0.72rem + 0.15vw, 0.875rem);
+  --wp--preset--font-size--sm:      clamp(0.875rem, 0.83rem + 0.22vw, 1rem);
+  --wp--preset--font-size--base:    clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+  --wp--preset--font-size--md:      clamp(1.125rem, 1.07rem + 0.27vw, 1.25rem);
+  --wp--preset--font-size--lg:      clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --wp--preset--font-size--xl:      clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --wp--preset--font-size--2xl:     clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+  --wp--preset--font-size--3xl:     clamp(2rem, 1.6rem + 2vw, 3.5rem);
+  --wp--preset--font-size--4xl:     clamp(2.5rem, 1.9rem + 3vw, 5rem);
+  --wp--preset--font-size--display: clamp(3rem, 1.8rem + 6vw, 8rem);
+
+  /* Spacing */
+  --wp--preset--spacing--1:  0.25rem;
+  --wp--preset--spacing--2:  0.5rem;
+  --wp--preset--spacing--3:  0.75rem;
+  --wp--preset--spacing--4:  1rem;
+  --wp--preset--spacing--5:  1.5rem;
+  --wp--preset--spacing--6:  2rem;
+  --wp--preset--spacing--8:  2.5rem;
+  --wp--preset--spacing--10: 3rem;
+  --wp--preset--spacing--12: 4rem;
+  --wp--preset--spacing--16: 6rem;
+  --wp--preset--spacing--20: 8rem;
+  --wp--preset--spacing--24: 10rem;
+
+  /* Semantic a11y tokens (bound to palette in skin.css) */
+  --cl-focus-ring:         var(--wp--preset--color--lig-signal);
+  --cl-focus-ring-inverse: var(--wp--preset--color--lig-white);
+  --cl-skip-bg:            var(--wp--preset--color--lig-signal);
+  --cl-skip-fg:            var(--wp--preset--color--lig-white);
+}
+
+/* ================================================================
+   @layer declaration order — mirrors reset.css exactly
+   ================================================================ */
+@layer reset, base, layout, components, blocks, utilities, preview;
+
+/* ================================================================
+   RESET (reset.css)
+   ================================================================ */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    color-scheme: light;
+    hanging-punctuation: first last;
+  }
+
+  body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  img, video, canvas { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; }
+  p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+  ol, ul { list-style: none; }
+}
+
+/* ================================================================
+   BASE (base.css)
+   ================================================================ */
+@layer base {
+  body {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--base);
+    font-weight: 400;
+    line-height: 1.7;
+    background: var(--wp--preset--color--lig-paper);
+    color: var(--wp--preset--color--lig-ink);
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  a {
+    color: var(--wp--preset--color--lig-signal);
+    text-decoration: none;
+  }
+  a:hover { color: var(--wp--preset--color--lig-ink); }
+
+  /* Heading scale — from theme.json elements.
+     h1/h2 are Newsreader serif; h3+ are DM Sans. */
+  h1 {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-size: var(--wp--preset--font-size--display);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--wp--preset--color--lig-ink);
+  }
+  h2 {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-size: var(--wp--preset--font-size--3xl);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--wp--preset--color--lig-ink);
+  }
+  h3 {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--xl);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--wp--preset--color--lig-ink);
+  }
+  h4 {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--lg);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--wp--preset--color--lig-secondary);
+  }
+  h5 {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+  }
+  h6 {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+  }
+
+  /* Focus ring — WCAG 2.4.7 */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--cl-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ================================================================
+   LAYOUT (skin.css @layer layout)
+   ================================================================ */
+@layer layout {
+  .lig-site { display: flex; flex-direction: column; min-height: 100dvh; }
+  .lig-main { flex: 1; }
+
+  /* Constrained content wrapper (1200px wide size, centred) */
+  .lig-constrained {
+    max-width: 1200px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  /* Reading measure (720px content size) */
+  .lig-reading { max-width: 720px; margin-inline: auto; }
+
+  /* Typographic hero */
+  .lig-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* Work grid — 2 columns at md (mirrors .ligature-work-index) */
+  .lig-work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wp--preset--spacing--12);
+  }
+  @media (min-width: 780px) {
+    .lig-work-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Portfolio grid — 2×3 case studies */
+  .lig-portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wp--preset--spacing--10);
+  }
+  @media (min-width: 720px) {
+    .lig-portfolio-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Asymmetric two-column (case study image + text) */
+  .lig-cols-50-50 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wp--preset--spacing--8);
+  }
+  @media (min-width: 768px) {
+    .lig-cols-50-50 { grid-template-columns: 1fr 1fr; gap: var(--wp--preset--spacing--12); align-items: center; }
+  }
+
+  /* Studio bio — 40/60 split */
+  .lig-cols-40-60 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wp--preset--spacing--8);
+  }
+  @media (min-width: 768px) {
+    .lig-cols-40-60 { grid-template-columns: 2fr 3fr; gap: var(--wp--preset--spacing--16); align-items: start; }
+  }
+}
+
+/* ================================================================
+   COMPONENTS (skin.css @layer components)
+   ================================================================ */
+@layer components {
+  /* Overline — DM Sans 500, tracked, all-caps, muted */
+  .is-style-lig-overline {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+    line-height: 1.4;
+  }
+
+  /* Work directory entry — horizontal name / type / year row */
+  .is-style-lig-directory-entry {
+    border-block-start: 1px solid var(--wp--preset--color--lig-rule);
+    padding-block: var(--wp--preset--spacing--8);
+    transition: border-color 0.15s ease;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--wp--preset--spacing--5);
+  }
+  .is-style-lig-directory-entry:hover {
+    border-block-start-color: var(--wp--preset--color--lig-signal);
+  }
+  .is-style-lig-directory-entry:last-child {
+    border-block-end: 1px solid var(--wp--preset--color--lig-rule);
+  }
+  .lig-entry-left { flex: 1; min-width: 0; }
+  .lig-entry-title {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-size: var(--wp--preset--font-size--2xl);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--wp--preset--color--lig-ink);
+  }
+  .lig-entry-title a { color: inherit; text-decoration: none; }
+  .lig-entry-type {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-signal);
+    margin-top: 0.4rem;
+  }
+  .lig-entry-year {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--xs);
+    color: var(--wp--preset--color--lig-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Section header (label + all-link row) */
+  .lig-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: var(--wp--preset--spacing--6);
+    border-bottom: 1px solid var(--wp--preset--color--lig-rule);
+  }
+
+  /* Case-study / portfolio card */
+  .lig-card { display: flex; flex-direction: column; }
+  .lig-card-type {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-signal);
+    margin-top: var(--wp--preset--spacing--4);
+  }
+  .lig-card-title {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-size: var(--wp--preset--font-size--xl);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--wp--preset--color--lig-ink);
+    margin-top: var(--wp--preset--spacing--2);
+  }
+  .lig-card-client {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--sm);
+    color: var(--wp--preset--color--lig-secondary);
+    margin-top: var(--wp--preset--spacing--2);
+  }
+
+  /* Process / problem-solution-outcome stage */
+  .lig-stage {
+    border-block-start: 1px solid var(--wp--preset--color--lig-rule);
+    padding-block: var(--wp--preset--spacing--8);
+    padding-inline-start: var(--wp--preset--spacing--12);
+    position: relative;
+  }
+  .lig-stage:last-child { border-block-end: 1px solid var(--wp--preset--color--lig-rule); }
+  .lig-stage-num {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: var(--wp--preset--spacing--8);
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--wp--preset--color--lig-signal);
+  }
+  .lig-stage-label {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+    margin-bottom: var(--wp--preset--spacing--3);
+  }
+
+  /* Credential list — no bullet, bottom rule between items */
+  .lig-credential-list { list-style: none; padding: 0; margin: 0; }
+  .lig-credential-list li {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--base);
+    font-weight: 500;
+    padding-block: var(--wp--preset--spacing--4);
+    border-block-end: 1px solid var(--wp--preset--color--lig-rule);
+    color: var(--wp--preset--color--lig-ink);
+  }
+  .lig-credential-list li:first-child { border-block-start: 1px solid var(--wp--preset--color--lig-rule); }
+
+  /* Pull quote — Newsreader italic, flush left, no side border */
+  .lig-pull-quote {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-style: italic;
+    font-size: var(--wp--preset--font-size--2xl);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--wp--preset--color--lig-ink);
+    margin-block: var(--wp--preset--spacing--8);
+  }
+
+  /* Brief form */
+  .lig-brief-form { display: flex; flex-direction: column; gap: var(--wp--preset--spacing--6); }
+  .lig-brief-form .lig-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--wp--preset--spacing--5);
+  }
+  .lig-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .lig-form-label {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+  }
+  .lig-input {
+    width: 100%;
+    padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
+    background: var(--wp--preset--color--lig-white);
+    border: 1px solid var(--wp--preset--color--lig-rule);
+    border-radius: 0;
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--base);
+    color: var(--wp--preset--color--lig-ink);
+    transition: border-color 0.15s ease;
+  }
+  .lig-textarea { resize: vertical; min-height: 130px; }
+  .lig-input:focus { outline: none; border-color: var(--wp--preset--color--lig-signal); }
+}
+
+/* ================================================================
+   BLOCKS (skin.css @layer blocks)
+   ================================================================ */
+@layer blocks {
+  /* Quote block — Newsreader italic, thin left rule */
+  .lig-quote {
+    border-left: 2px solid var(--wp--preset--color--lig-rule);
+    padding-left: var(--wp--preset--spacing--6);
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-style: italic;
+    margin-block: var(--wp--preset--spacing--6);
+    color: var(--wp--preset--color--lig-secondary);
+  }
+
+  /* Image placeholder */
+  .lig-img-placeholder {
+    background: var(--wp--preset--color--lig-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wp--preset--color--lig-muted);
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Post terms / category — signal blue, tracked all-caps */
+  .lig-post-terms {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-signal);
+  }
+
+  /* Post navigation */
+  .lig-post-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--wp--preset--spacing--8);
+    padding-block: var(--wp--preset--spacing--10);
+    border-top: 1px solid var(--wp--preset--color--lig-rule);
+  }
+  .lig-post-nav-label {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--2xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--lig-muted);
+    margin-bottom: 0.5rem;
+  }
+  .lig-post-nav-title {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-size: var(--wp--preset--font-size--lg);
+    font-weight: 400;
+    color: var(--wp--preset--color--lig-ink);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ================================================================
+   UTILITIES (skin.css @layer utilities)
+   ================================================================ */
+@layer utilities {
+  .lig-band--surface     { background: var(--wp--preset--color--lig-surface); }
+  .lig-band--signal-tint { background: var(--wp--preset--color--lig-signal-tint); }
+  .lig-band--paper       { background: var(--wp--preset--color--lig-paper); }
+
+  /* Ink band — dark overlay surface, inverted focus ring */
+  .lig-band--ink {
+    background: var(--wp--preset--color--lig-overlay);
+    color: var(--wp--preset--color--lig-white);
+    --cl-focus-ring: var(--cl-focus-ring-inverse);
+  }
+  .lig-band--ink a { color: var(--wp--preset--color--lig-white); }
+  .lig-band--ink a:hover { color: var(--wp--preset--color--lig-rule); }
+  .lig-band--ink h1, .lig-band--ink h2 { color: var(--wp--preset--color--lig-white); }
+}
+
+/* ================================================================
+   PREVIEW — header, footer, and shared page chrome
+   ================================================================ */
+@layer preview {
+  /* Site header — wordmark left, nav right, thin rule below */
+  .lig-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--wp--preset--spacing--5) var(--wp--preset--spacing--5);
+    background: var(--wp--preset--color--lig-paper);
+    border-bottom: 1px solid var(--wp--preset--color--lig-rule);
+  }
+  .lig-wordmark {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-style: italic;
+    font-size: var(--wp--preset--font-size--lg);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--wp--preset--color--lig-ink);
+    text-decoration: none;
+  }
+  .lig-nav {
+    display: flex;
+    gap: var(--wp--preset--spacing--8);
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .lig-nav a {
+    color: var(--wp--preset--color--lig-ink);
+    text-decoration: none;
+  }
+  .lig-nav a:hover { color: var(--wp--preset--color--lig-signal); }
+
+  /* Section container */
+  .lig-section {
+    padding: var(--wp--preset--spacing--16) var(--wp--preset--spacing--5);
+  }
+  .lig-section-sm {
+    padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--5);
+  }
+  .lig-section-inner {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
+  /* Accent rule — short signal-blue bar under hero headlines */
+  .lig-accent-rule {
+    width: 64px;
+    height: 3px;
+    background: var(--wp--preset--color--lig-signal);
+    border: none;
+    margin: var(--wp--preset--spacing--6) 0;
+  }
+
+  /* Footer — one-line studio name + contact */
+  .lig-footer {
+    padding: var(--wp--preset--spacing--12) var(--wp--preset--spacing--5);
+    background: var(--wp--preset--color--lig-overlay);
+    color: var(--wp--preset--color--lig-white);
+  }
+  .lig-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--wp--preset--spacing--6);
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  .lig-footer-name {
+    font-family: var(--wp--preset--font-family--newsreader);
+    font-style: italic;
+    font-size: var(--wp--preset--font-size--xl);
+    font-weight: 400;
+    color: var(--wp--preset--color--lig-white);
+  }
+  .lig-footer-contact {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--sm);
+    letter-spacing: 0.02em;
+  }
+  .lig-footer-contact a { color: var(--wp--preset--color--lig-white); text-decoration: none; }
+  .lig-footer-contact a:hover { color: var(--wp--preset--color--lig-rule); }
+
+  /* Post meta row */
+  .lig-post-meta {
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--xs);
+    color: var(--wp--preset--color--lig-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: var(--wp--preset--spacing--5);
+    align-items: center;
+    padding-block: var(--wp--preset--spacing--5);
+  }
+  .lig-post-meta-sep { color: var(--wp--preset--color--lig-rule); }
+
+  /* Button */
+  .lig-btn {
+    display: inline-block;
+    background: var(--wp--preset--color--lig-ink);
+    color: var(--wp--preset--color--lig-white);
+    font-family: var(--wp--preset--font-family--dm-sans);
+    font-size: var(--wp--preset--font-size--sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border-radius: 0;
+    border: none;
+    padding: var(--wp--preset--spacing--4) var(--wp--preset--spacing--6);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .lig-btn:hover {
+    background: var(--wp--preset--color--lig-overlay);
+    color: var(--wp--preset--color--lig-white);
+  }
+
+  /* Mobile hamburger icon */
+  .lig-hamburger {
+    width: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .lig-hamburger span {
+    display: block;
+    height: 1.5px;
+    background: var(--wp--preset--color--lig-ink);
+  }
+}

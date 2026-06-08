@@ -1,0 +1,286 @@
+/* ── Parametric colour system (Colophon v2) ─────────────────────────────────
+   Three anchor custom props drive the entire neutral + accent scale via
+   color-mix() in OKLCh space. Set in settings.custom (theme.json); overridden
+   per style variation via the same settings.custom key.
+
+   Derived tokens (--clr-*) are intentionally separate from the block-editor
+   palette (--wp--preset--color--*). The palette tokens give the editor
+   accurate swatches; --clr-* tokens give CSS components automatic
+   variation-awareness without manual per-token overrides.
+
+   color-mix() browser support: Chrome 111+ · Firefox 113+ · Safari 16.2+
+   Global coverage ≈ 93 %. Fallback values (hex literals) serve older clients.
+   ─────────────────────────────────────────────────────────────────────────── */
+body {
+  /* Anchors — resolved from settings.custom; hex literals are the fallback */
+  --colophon-light:  var(--wp--custom--colophon-light,  #F7F6F3);
+  --colophon-dark:   var(--wp--custom--colophon-dark,   #141413);
+  --colophon-accent: var(--wp--custom--colophon-accent, #1A56D6);
+
+  /* Derived neutral scale (8 % / 22 % / 45 % stops in OKLCh) */
+  --clr-bg:          var(--colophon-light);
+  --clr-fg:          var(--colophon-dark);
+  --clr-surface:     color-mix(in oklch, var(--colophon-dark)  8%,  var(--colophon-light));
+  --clr-rule:        color-mix(in oklch, var(--colophon-dark) 22%,  var(--colophon-light));
+  --clr-muted:       color-mix(in oklch, var(--colophon-dark) 45%,  var(--colophon-light));
+
+  /* Accent and its tinted surface */
+  --clr-accent:      var(--colophon-accent);
+  --clr-accent-tint: color-mix(in oklch, var(--colophon-accent) 12%, var(--colophon-light));
+}
+
+/* =====================================================================
+   [SKIN] skin.css — Ligature's layout, components, blocks, and utilities.
+   ---------------------------------------------------------------------
+   This is Ligature's personality. The reset and base sheets are shared
+   across the Colophon collection; this sheet is what makes Ligature a
+   brand identity studio theme and not a news theme.
+
+   Architecture: CSS @layers (declared in reset.css):
+     @layer layout     — structural containers, grids
+     @layer components — reusable UI (case-study cards, process stages)
+     @layer blocks     — WordPress block-specific overrides
+     @layer utilities  — single-purpose helpers
+
+   Pillar 8 (Kodawari): the studio statement earns its proportion — the
+   headline at display scale, the credential list below, no decorative
+   ornament between them. Typography does every gram of the work.
+   Pillar 9 (Archaeological Records): section headers explain WHY.
+   ===================================================================== */
+
+/* =====================================================================
+   LAYER: layout
+   ===================================================================== */
+@layer layout {
+
+	:root {
+		--wp--style--root--padding-top:    var(--wp--preset--spacing--4);
+		--wp--style--root--padding-right:  var(--wp--preset--spacing--5);
+		--wp--style--root--padding-bottom: var(--wp--preset--spacing--4);
+		--wp--style--root--padding-left:   var(--wp--preset--spacing--5);
+	}
+
+	:root { color-scheme: light; }
+
+	:root {
+		--cl-focus-ring:         var(--wp--preset--color--lig-signal);
+		--cl-focus-ring-inverse: var(--wp--preset--color--lig-white);
+		--cl-skip-bg:            var(--wp--preset--color--lig-signal);
+		--cl-skip-fg:            var(--wp--preset--color--lig-white);
+	}
+
+	/* Work-index: single column on mobile, 2-col grid at md */
+	.ligature-work-index {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--8);
+	}
+	@media (min-width: 780px) {
+		.ligature-work-index { grid-template-columns: 1fr 1fr; }
+	}
+
+	/* Process section: numbered stages, stacked on mobile */
+	.ligature-process-section {
+		display: flex;
+		flex-direction: column;
+		gap: 0; /* gap is handled inside each is-style-lig-process-stage */
+	}
+
+	/* Client roster grid */
+	.ligature-client-roster {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--wp--preset--spacing--6);
+	}
+	@media (min-width: 680px) {
+		.ligature-client-roster { grid-template-columns: repeat(3, 1fr); }
+	}
+	@media (min-width: 960px) {
+		.ligature-client-roster { grid-template-columns: repeat(4, 1fr); }
+	}
+
+	/* Selected-work asymmetric: 60/40 */
+	.ligature-selected-work {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--8);
+	}
+	@media (min-width: 900px) {
+		.ligature-selected-work { grid-template-columns: 3fr 2fr; align-items: start; }
+	}
+}
+
+/* =====================================================================
+   LAYER: components
+   ===================================================================== */
+@layer components {
+
+	/* Overline — DM Sans 500, tracked, all-caps, lig-muted */
+	.is-style-lig-overline {
+		font-family: var(--wp--preset--font-family--dm-sans) !important;
+		font-size: var(--wp--preset--font-size--2xs) !important;
+		font-weight: 500 !important;
+		letter-spacing: 0.08em !important;
+		text-transform: uppercase !important;
+		color: var(--wp--preset--color--lig-muted) !important;
+		line-height: 1.4 !important;
+	}
+
+	/* Pull quote — Newsreader italic, larger scale, flush left, no side border */
+	.is-style-lig-pull-quote {
+		border: none !important;
+		padding: 0 !important;
+	}
+	.is-style-lig-pull-quote > p {
+		font-family: var(--wp--preset--font-family--newsreader) !important;
+		font-style: italic !important;
+		font-size: var(--wp--preset--font-size--2xl) !important;
+		font-weight: 400 !important;
+		line-height: 1.2 !important;
+		color: var(--wp--preset--color--lig-ink) !important;
+	}
+
+	/* Process stage — counter auto-number, indigo left accent rule */
+	.ligature-process-section { counter-reset: ligature-process; }
+	.is-style-lig-process-stage {
+		counter-increment: ligature-process;
+		border-block-start: 1px solid var(--wp--preset--color--lig-rule);
+		padding-block: var(--wp--preset--spacing--8);
+		position: relative;
+		padding-inline-start: var(--wp--preset--spacing--12);
+	}
+	.is-style-lig-process-stage::before {
+		content: counter(ligature-process, decimal-leading-zero);
+		position: absolute;
+		inset-inline-start: 0;
+		inset-block-start: var(--wp--preset--spacing--8);
+		font-family: var(--wp--preset--font-family--dm-sans);
+		font-size: var(--wp--preset--font-size--2xs);
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		color: var(--wp--preset--color--lig-signal);
+	}
+	.is-style-lig-process-stage:last-child {
+		border-block-end: 1px solid var(--wp--preset--color--lig-rule);
+	}
+
+	/* Credential list — no bullet, DM Sans 500, bottom rule between items */
+	.is-style-lig-credential-list {
+		list-style: none !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	.is-style-lig-credential-list li {
+		font-family: var(--wp--preset--font-family--dm-sans) !important;
+		font-size: var(--wp--preset--font-size--base) !important;
+		font-weight: 500 !important;
+		padding-block: var(--wp--preset--spacing--4) !important;
+		border-block-end: 1px solid var(--wp--preset--color--lig-rule) !important;
+		color: var(--wp--preset--color--lig-ink) !important;
+	}
+
+	/* Case study meta — 2-col grid, 2xs label above base value */
+	.is-style-lig-case-meta {
+		display: grid !important;
+		grid-template-columns: 1fr 1fr !important;
+		gap: var(--wp--preset--spacing--5) !important;
+	}
+
+	/* Client roster card — centered, minimal, hover reveals name */
+	.ligature-client-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background: var(--wp--preset--color--lig-surface);
+		padding: var(--wp--preset--spacing--6);
+		aspect-ratio: 3/2;
+		transition: background 0.15s ease;
+	}
+	.ligature-client-card:hover { background: var(--wp--preset--color--lig-signal-tint); }
+	/* Interactivity API: hidden class toggled by category filter */
+	.ligature-client-card.is-hidden { display: none; }
+}
+
+/* =====================================================================
+   LAYER: blocks
+   ===================================================================== */
+@layer blocks {
+
+	.wp-block-navigation a:hover {
+		text-decoration: none;
+		color: var(--wp--preset--color--lig-signal);
+	}
+
+	.wp-block-post-title a:hover {
+		text-decoration: none;
+		color: var(--wp--preset--color--lig-signal);
+	}
+
+	.wp-block-post-featured-image img { border-radius: 0; }
+
+	.wp-block-separator {
+		border-color: var(--wp--preset--color--lig-rule);
+		max-inline-size: 100%;
+	}
+
+	/* Quote block default: Newsreader italic, thin left rule */
+	.wp-block-quote {
+		font-family: var(--wp--preset--font-family--newsreader);
+		font-style: italic;
+	}
+
+	/* Post terms: signal blue, tracked all-caps */
+	.wp-block-post-terms {
+		font-family: var(--wp--preset--font-family--dm-sans);
+		font-size: var(--wp--preset--font-size--2xs);
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--wp--preset--color--lig-signal);
+	}
+}
+
+/* =====================================================================
+   LAYER: utilities
+   ===================================================================== */
+@layer utilities {
+
+	.ligature-band--surface { background: var(--wp--preset--color--lig-surface); }
+
+	.ligature-band--overlay {
+		background: var(--wp--preset--color--lig-overlay);
+		color: var(--wp--preset--color--lig-white);
+		--cl-focus-ring: var(--cl-focus-ring-inverse);
+	}
+	.ligature-band--overlay a { color: var(--wp--preset--color--lig-white); }
+	.ligature-band--overlay a:hover { color: var(--wp--preset--color--lig-rule); }
+
+	.ligature-band--signal-tint { background: var(--wp--preset--color--lig-signal-tint); }
+
+	.ligature-band--paper { background: var(--wp--preset--color--lig-paper); }
+}
+
+/* ── Print ──────────────────────────────────────────────────────────────────
+   Hide chrome; show clean reading content.
+   ─────────────────────────────────────────────────────────────────────────── */
+@media print {
+  .wp-block-navigation,
+  .wp-block-site-logo,
+  .wp-site-blocks > footer,
+  [data-wp-interactive] { display: none !important; }
+
+  body,
+  .wp-site-blocks {
+    font-size: 12pt;
+    color: #000 !important;
+    background: #fff !important;
+    max-width: 100% !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+}

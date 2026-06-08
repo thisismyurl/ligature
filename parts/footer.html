@@ -1,0 +1,44 @@
+<!-- Footer template part for Ligature.
+     Dark overlay band: studio name in Newsreader, tagline in DM Sans.
+     Footer nav right-aligned. Copyright row in DM Sans 2xs. -->
+
+<!-- wp:group {"tagName":"footer","className":"ligature-site-footer ligature-band--overlay","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|10","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<footer class="wp-block-group ligature-site-footer ligature-band--overlay" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
+
+	<!-- Top row: studio name + nav -->
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
+	<div class="wp-block-group">
+
+		<!-- Studio name and discipline line -->
+		<!-- wp:group {"layout":{"type":"default"},"style":{"spacing":{"blockGap":"var:preset|spacing|2"}}} -->
+		<div class="wp-block-group">
+			<!-- wp:site-title {"level":0,"isLink":true,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|xl","letterSpacing":"-0.01em","textDecoration":"none"},"color":{"text":"var:preset|color|lig-white"}}} /-->
+			<!-- wp:site-tagline {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.1em","textTransform":"uppercase"},"color":{"text":"var:preset|color|lig-muted"}}} /-->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- Footer navigation -->
+		<!-- wp:navigation {"textColor":"lig-white","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","letterSpacing":"0.02em"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
+
+	</div>
+	<!-- /wp:group -->
+
+	<!-- Separator -->
+	<!-- wp:separator {"style":{"spacing":{"margin":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|6"}},"color":{"background":"rgba(255,255,255,0.1)"}}} -->
+	<hr class="wp-block-separator has-alpha-channel-opacity has-background" style="margin-top:var(--wp--preset--spacing--10);margin-bottom:var(--wp--preset--spacing--6);background-color:rgba(255,255,255,0.1)" />
+	<!-- /wp:separator -->
+
+	<!-- Copyright row -->
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"},"style":{"spacing":{"blockGap":"var:preset|spacing|4"}}} -->
+	<div class="wp-block-group">
+		<!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"},"color":{"text":"var:preset|color|lig-muted"}}} -->
+		<p class="has-text-color" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em;color:var(--wp--preset--color--lig-muted)">&copy; [year] &mdash; All rights reserved.</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"},"color":{"text":"var:preset|color|lig-muted"}}} -->
+		<p class="has-text-color" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em;color:var(--wp--preset--color--lig-muted)">Built with <a href="https://wordpress.org" style="color:inherit">WordPress</a> &amp; Ligature</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+
+</footer>
+<!-- /wp:group -->
