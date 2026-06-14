@@ -1,17 +1,18 @@
 <!-- Wide page template for Ligature.
-     Same as page.html but content expands to wideSize (1440px).
+     Same as page.html but content expands to wideSize (1200px, the theme.json
+     wideSize token).
      Use for: portfolio index pages, full-bleed case study landing pages,
      or any page whose editor has chosen to go edge-to-edge with content.
      The editor still controls individual block alignment within this template. -->
 
 <!-- wp:template-part {"slug":"header"} /-->
 
-<!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-page-wide","layout":{"type":"constrained","contentSize":"1440px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|20","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}}} -->
+<!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-page-wide","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|20","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}}} -->
 <main id="main-content" class="wp-block-group ligature-main ligature-page-wide" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
 
 	<!-- wp:post-title {"level":1,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"300","fontSize":"var:preset|font-size|display","letterSpacing":"-0.02em","lineHeight":"1.05"},"color":{"text":"var:preset|color|lig-ink"},"spacing":{"margin":{"bottom":"var:preset|spacing|10"}}}} /-->
 
-	<!-- wp:post-content {"layout":{"type":"constrained","contentSize":"1440px"}} /-->
+	<!-- wp:post-content {"layout":{"type":"constrained","contentSize":"1200px"}} /-->
 
 </main>
 <!-- /wp:group -->

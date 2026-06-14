@@ -42,7 +42,7 @@
         },
         {
           "slug": "lig-signal",
-          "color": "#C4601A",
+          "color": "#A8500E",
           "name": "Lig Signal"
         },
         {
@@ -60,7 +60,7 @@
     "custom": {
       "colophon-light": "#FFFFFF",
       "colophon-dark": "#000000",
-      "colophon-accent": "#C4601A"
+      "colophon-accent": "#A8500E"
     }
   },
   "styles": {

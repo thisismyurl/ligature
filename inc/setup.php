@@ -188,16 +188,23 @@ function comment_form_field_attributes( array $fields ): array {
 }
 add_filter( 'comment_form_default_fields', __NAMESPACE__ . '\\comment_form_field_attributes' );
 
-/*
- * Skip link — NOT registered here.
+/**
+ * Print the skip-to-content link at the very top of the document body.
  *
- * Every theme template carries the skip link in its header template part
- * (parts/header.html), rendered via wp:html. Registering a second one here
- * via wp_body_open produced a duplicate in the rendered DOM — two visible
- * "Skip to content" links on Tab keypress, one of which targeted a
- * non-existent anchor. The template-part approach is correct: it is always
- * in the rendered markup, it is in the right DOM position, and there is
- * exactly one of it.
+ * Rendered in PHP (not in parts/header.html) for one reason: the label must be
+ * translatable, and a static wp:html block in a template part ships
+ * untranslatable English. wp_body_open fires once, immediately after <body>, so
+ * the link lands in the correct DOM position and there is exactly one of it —
+ * the same single-instance guarantee the template-part approach gave, now with
+ * a gettext-wrapped label. The target #main-content matches the <main> landmark
+ * every template renders.
  *
- * See parts/header.html for the authoritative skip link.
+ * Pillar 5 (Safe by Default): the keyboard skip link is on by default.
  */
+function render_skip_link(): void {
+	printf(
+		'<a class="skip-link screen-reader-text" href="#main-content">%s</a>',
+		esc_html__( 'Skip to content', 'ligature' )
+	);
+}
+add_action( 'wp_body_open', __NAMESPACE__ . '\\render_skip_link' );

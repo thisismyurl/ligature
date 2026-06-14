@@ -5,7 +5,7 @@
  *
  * A static template part can't compute the current year, and hardcoding one is
  * a quiet way to look abandoned every January. So parts/footer.html binds its
- * copyright paragraph to the `colophon/copyright` source registered here (WP
+ * copyright paragraph to the `ligature/copyright` source registered here (WP
  * 6.5+ block bindings) — one small, removable callback instead of a render
  * filter reinventing what the bindings API already does.
  *
@@ -70,7 +70,7 @@ function get_copyright_value(): string {
 	 * for a year range. The value is passed to current_time() so the result
 	 * follows the site's timezone setting.
 	 *
-	 * @since 1.6148
+	 * @since 1.0.0
 	 *
 	 * @param string $format PHP date format string, or a literal string.
 	 */

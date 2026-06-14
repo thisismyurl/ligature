@@ -1,9 +1,10 @@
 <!-- Search results template for Ligature.
-     Shows "Results for: X" as an eyebrow header above a typographic
-     post list. No-results state orients the user and offers a refined search.
+     The query-title block supplies WordPress core's localized "Search results
+     for: X" heading above a typographic post list.
 
      Pillar 6 (Resilience): the no-results state is an experience, not an
-     empty page. The search form reappears so the user has a clear next action. -->
+     empty page. The search form reappears so the user has a clear next action,
+     with no hardcoded prose that would ship untranslatable English. -->
 
 <!-- wp:template-part {"slug":"header"} /-->
 
@@ -14,10 +15,9 @@
 	<!-- wp:group {"className":"ligature-search-header","style":{"spacing":{"blockGap":"var:preset|spacing|4","padding":{"bottom":"var:preset|spacing|10"},"margin":{"bottom":"var:preset|spacing|10"}},"border":{"bottom":{"color":"var:preset|color|lig-rule","style":"solid","width":"1px"}}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group ligature-search-header" style="padding-bottom:var(--wp--preset--spacing--10);margin-bottom:var(--wp--preset--spacing--10);border-bottom:1px solid var(--wp--preset--color--lig-rule)">
 
-		<!-- wp:paragraph {"className":"is-style-ligature-eyebrow"} -->
-		<p class="is-style-ligature-eyebrow">Search Results</p>
-		<!-- /wp:paragraph -->
-
+		<!-- The query-title block supplies the localized "Search results for: X"
+		     heading from WordPress core, so no hardcoded eyebrow prose is needed
+		     here. level:1 makes this the single h1 for the template. -->
 		<!-- wp:query-title {"type":"search","level":1,"textAlign":"left","style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"300","fontSize":"var:preset|font-size|3xl","letterSpacing":"-0.02em","lineHeight":"1.1"},"color":{"text":"var:preset|color|lig-ink"}}} /-->
 
 	</div>
@@ -39,14 +39,14 @@
 
 		<!-- /wp:post-template -->
 
-		<!-- No results: re-offer the search form with a plain-language message -->
+		<!-- No results: re-offer the search form as the retry action -->
 		<!-- wp:query-no-results -->
 			<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"},"blockGap":"var:preset|spacing|6"}},"layout":{"type":"default"}} -->
 			<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)">
-				<!-- wp:paragraph {"className":"is-style-ligature-annotation"} -->
-				<p class="is-style-ligature-annotation">No results found. Try a different term, or browse the works directory.</p>
-				<!-- /wp:paragraph -->
-				<!-- wp:search {"label":"Search","buttonText":"Search","buttonUseIcon":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"}}} /-->
+				<!-- Re-offer the search form as the retry action. No hardcoded
+				     explanatory prose, so the no-results state ships no
+				     untranslatable English; the form itself is the next step. -->
+				<!-- wp:search {"buttonUseIcon":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"}}} /-->
 			</div>
 			<!-- /wp:group -->
 		<!-- /wp:query-no-results -->

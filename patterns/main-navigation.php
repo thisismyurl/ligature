@@ -8,6 +8,8 @@
  * Description: Clean horizontal site header — italic Newsreader wordmark left, DM Sans navigation links right, and a signal-blue start-a-project button. Static markup, not a navigation block.
  */
 ?>
+<!-- Demo links: the Work (/work) and Contact (/contact) links point to
+     placeholder pages — repoint them to your own pages after inserting. -->
 <!-- wp:group {"className":"ligature-section ligature-nav","backgroundColor":"lig-paper","style":{"spacing":{"padding":{"top":"var:preset|spacing|5","bottom":"var:preset|spacing|5","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}},"border":{"bottom":{"color":"var:preset|color|lig-rule","style":"solid","width":"1px"}}},"layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 <div class="wp-block-group ligature-section ligature-nav has-lig-paper-background-color has-background" style="border-bottom:1px solid var(--wp--preset--color--lig-rule);padding-top:var(--wp--preset--spacing--5);padding-bottom:var(--wp--preset--spacing--5);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
 

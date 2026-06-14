@@ -247,7 +247,7 @@ function get_started_content(): array {
 		),
 		'optimize'   => array(
 			__( "This theme is already fast by design: zero front-end JavaScript, self-hosted fonts that don't phone home, and tuning against the Core Web Vitals search engines actually measure.", 'ligature' ),
-			__( 'It meets WCAG 2.2 AA — real focus outlines, a skip link, sensible heading order, and motion that respects a reduce-motion setting. Keep your own copy and images to that bar and the whole site stays welcoming.', 'ligature' ),
+			__( "It's built to support WCAG 2.2 AA — real focus outlines, a skip link, sensible heading order, and motion that respects a reduce-motion setting. Keep your own copy and images to that bar and the whole site stays welcoming.", 'ligature' ),
 		),
 		'credit'     => __( "There's a small credit in your footer. It's a thank-you, not a tax — remove it in two clicks in the Site Editor → Footer, or filter it out in code. No hard feelings either way.", 'ligature' ),
 		'developers' => array(

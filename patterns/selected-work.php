@@ -8,6 +8,9 @@
  * Description: Asymmetric 60/40 featured case study — large image left, title and excerpt right with case meta. For the front-page featured slot; not a query block.
  */
 ?>
+<!-- Demo links: the "See all work" (/work) and "Read case study"
+     (/work/meridian-capital) links point to placeholder pages — repoint them to
+     your own work archive and case study after inserting the pattern. -->
 <!-- wp:group {"className":"ligature-section ligature-band--surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group ligature-section ligature-band--surface" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
 

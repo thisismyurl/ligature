@@ -40,10 +40,10 @@
 
 		<!-- /wp:post-template -->
 
+		<!-- The empty state offers a search form to retry rather than a fixed prose
+		     line, so no untranslatable visitor copy ships in the pattern. -->
 		<!-- wp:query-no-results -->
-			<!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"},"color":{"text":"var:preset|color|lig-muted"}}} -->
-			<p style="font-family:var(--wp--preset--font-family--dm-sans);color:var(--wp--preset--color--lig-muted)">No case studies published yet.</p>
-			<!-- /wp:paragraph -->
+			<!-- wp:search {"label":"","showLabel":false,"buttonText":"","buttonPosition":"button-inside","buttonUseIcon":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"}}} /-->
 		<!-- /wp:query-no-results -->
 	</div>
 	<!-- /wp:query -->

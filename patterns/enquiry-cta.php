@@ -23,6 +23,8 @@
 	<p style="margin-top:var(--wp--preset--spacing--6);font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--md);line-height:1.7;color:var(--wp--preset--color--lig-secondary)">Send a brief or a conversation starter — what the organisation does, what's changing, and what you're trying to solve for. We respond within two business days.</p>
 	<!-- /wp:paragraph -->
 
+	<!-- Demo links: repoint the email button (mailto:hello@yourstudio.com) and the
+	     "View selected work" button (/work) to your own address and pages. -->
 	<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|10"},"blockGap":"var:preset|spacing|4"}}} -->
 	<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--10)">
 		<!-- wp:button {"style":{"border":{"radius":"0"},"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","fontWeight":"500"}}} -->

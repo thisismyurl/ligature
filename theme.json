@@ -26,7 +26,7 @@
         },
         {
           "slug": "lig-muted",
-          "color": "#8C8985",
+          "color": "#6B6965",
           "name": "Muted"
         },
         {
@@ -442,7 +442,7 @@
       "button": {
         "color": {
           "background": "var(--wp--preset--color--lig-ink)",
-          "text": "var(--wp--preset--color--lig-white)"
+          "text": "var(--wp--preset--color--lig-paper)"
         },
         "typography": {
           "fontFamily": "var(--wp--preset--font-family--dm-sans)",
@@ -463,12 +463,14 @@
         },
         ":hover": {
           "color": {
-            "background": "var(--wp--preset--color--lig-overlay)"
+            "background": "#16150F",
+            "text": "#F7F6F3"
           }
         },
         ":focus": {
           "color": {
-            "background": "var(--wp--preset--color--lig-overlay)"
+            "background": "#16150F",
+            "text": "#F7F6F3"
           }
         }
       }

@@ -3,22 +3,25 @@
 <!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-404","layout":{"type":"constrained","contentSize":"720px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}}} -->
 <main id="main-content" class="wp-block-group ligature-main ligature-404" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
 
-	<!-- The specimen moment: 404 at display scale -->
-	<!-- wp:heading {"level":1,"className":"is-style-ligature-specimen-display","style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"900","fontSize":"var:preset|font-size|display","letterSpacing":"-0.03em","lineHeight":"1"},"color":{"text":"var:preset|color|lig-rule"}}} -->
-	<h1 class="wp-block-heading is-style-ligature-specimen-display has-lig-rule-color has-text-color" style="font-family:var(--wp--preset--font-family--newsreader);font-size:var(--wp--preset--font-size--display);font-weight:900;letter-spacing:-0.03em;line-height:1">404</h1>
+	<!-- The specimen moment: 404 at display scale. Coloured lig-muted (not
+	     lig-rule): rule is a hairline tone that drops under 3:1 as text on the
+	     body ground in every edition; muted is the quietest token that still
+	     clears the large-text contrast floor. -->
+	<!-- wp:heading {"level":1,"className":"is-style-ligature-specimen-display","style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"900","fontSize":"var:preset|font-size|display","letterSpacing":"-0.03em","lineHeight":"1"},"color":{"text":"var:preset|color|lig-muted"}}} -->
+	<h1 class="wp-block-heading is-style-ligature-specimen-display has-lig-muted-color has-text-color" style="font-family:var(--wp--preset--font-family--newsreader);font-size:var(--wp--preset--font-size--display);font-weight:900;letter-spacing:-0.03em;line-height:1">404</h1>
 	<!-- /wp:heading -->
 
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6","padding":{"top":"var:preset|spacing|8"}}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--8)">
 
-		<!-- wp:paragraph {"className":"is-style-ligature-annotation"} -->
-		<p class="is-style-ligature-annotation">This page doesn't exist. Try searching, or return to the works directory.</p>
-		<!-- /wp:paragraph -->
-
-		<!-- wp:search {"label":"Search","buttonText":"Search","buttonUseIcon":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"}}} /-->
+		<!-- Heading + search form + home link only. Visitor-facing explanatory
+		     prose is intentionally omitted so this template carries no hardcoded,
+		     untranslatable English; the search form and home link are the
+		     recovery actions. -->
+		<!-- wp:search {"buttonUseIcon":true,"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans"}}} /-->
 
 		<!-- wp:paragraph {"className":"is-style-ligature-annotation ligature-404-back","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm"},"color":{"text":"var:preset|color|lig-muted"}}} -->
-		<p class="is-style-ligature-annotation ligature-404-back" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--sm);color:var(--wp--preset--color--lig-muted)"><!-- wp:home-link {"label":"← Back to start"} /--></p>
+		<p class="is-style-ligature-annotation ligature-404-back" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--sm);color:var(--wp--preset--color--lig-muted)"><!-- wp:home-link /--></p>
 		<!-- /wp:paragraph -->
 
 	</div>

@@ -20,11 +20,6 @@ namespace Ligature;
 
 defined( 'ABSPATH' ) || exit;
 
-// Opt this theme into GitHub-release self-updates (see inc/github-updater.php).
-add_filter( 'ligature/github_updater_repo', static function (): string {{
-	return 'thisismyurl/ligature';
-}} );
-
 /**
  * Register Ligature's image crop sizes.
  *
@@ -117,6 +112,36 @@ function skin_block_styles(): void {
 	);
 }
 add_action( 'init', __NAMESPACE__ . '\\skin_block_styles' );
+
+/**
+ * Register the client-roster Interactivity API view module.
+ *
+ * Registered (not enqueued) on init so it is available to wp_enqueue_script_module()
+ * wherever the client-roster pattern actually renders — patterns/client-roster.php
+ * enqueues it at parse time, so it loads only on pages that use the roster, never
+ * site-wide. Depends on @wordpress/interactivity, the core store runtime (WP 6.5+).
+ *
+ * Guarded on wp_register_script_module() so the theme degrades cleanly on any
+ * pre-6.5 install: the module simply never registers and the roster stays a
+ * static, fully-visible grid.
+ *
+ * @since 1.6163.2237
+ */
+function register_client_roster_module(): void {
+	if ( ! function_exists( 'wp_register_script_module' ) ) {
+		return;
+	}
+
+	$path = '/assets/js/client-roster.js';
+
+	wp_register_script_module(
+		SLUG . '-client-roster',
+		URI . $path,
+		array( '@wordpress/interactivity' ),
+		(string) filemtime( DIR . $path )
+	);
+}
+add_action( 'init', __NAMESPACE__ . '\\register_client_roster_module' );
 
 /**
  * Register Ligature's block pattern categories.

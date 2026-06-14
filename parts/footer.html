@@ -1,6 +1,9 @@
 <!-- Footer template part for Ligature.
      Dark overlay band: studio name in Newsreader, tagline in DM Sans.
-     Footer nav right-aligned. Copyright row in DM Sans 2xs. -->
+     Footer nav right-aligned. The copyright and credit lines in the bottom row
+     are block-binding paragraphs (ligature/copyright and ligature/footer-credit,
+     registered in inc/bindings.php); both require WordPress 6.5+ and carry empty
+     fallbacks so no untranslatable English ships. -->
 
 <!-- wp:group {"tagName":"footer","className":"ligature-site-footer ligature-band--overlay","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|10","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
 <footer class="wp-block-group ligature-site-footer ligature-band--overlay" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
@@ -12,13 +15,19 @@
 		<!-- Studio name and discipline line -->
 		<!-- wp:group {"layout":{"type":"default"},"style":{"spacing":{"blockGap":"var:preset|spacing|2"}}} -->
 		<div class="wp-block-group">
-			<!-- wp:site-title {"level":0,"isLink":true,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|xl","letterSpacing":"-0.01em","textDecoration":"none"},"color":{"text":"var:preset|color|lig-white"}}} /-->
-			<!-- wp:site-tagline {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.1em","textTransform":"uppercase"},"color":{"text":"var:preset|color|lig-muted"}}} /-->
+			<!-- Site title and the quiet labels below take their colour from the
+			     edition-stable .ligature-band--overlay rule (assets/css/skin.css),
+			     not a per-edition colour token; binding them to lig-white / lig-muted
+			     inverts in the dark and light editions and breaks contrast. -->
+			<!-- wp:site-title {"level":0,"isLink":true,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|xl","letterSpacing":"-0.01em","textDecoration":"none"}}} /-->
+			<!-- wp:site-tagline {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.1em","textTransform":"uppercase"}}} /-->
 		</div>
 		<!-- /wp:group -->
 
 		<!-- Footer navigation -->
-		<!-- wp:navigation {"textColor":"lig-white","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","letterSpacing":"0.02em"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
+		<!-- Footer nav colour comes from the edition-stable .ligature-band--overlay
+		     rule, not lig-white (which inverts per edition). -->
+		<!-- wp:navigation {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|sm","letterSpacing":"0.02em"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
 
 	</div>
 	<!-- /wp:group -->
@@ -31,11 +40,20 @@
 	<!-- Copyright row -->
 	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"},"style":{"spacing":{"blockGap":"var:preset|spacing|4"}}} -->
 	<div class="wp-block-group">
-		<!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"},"color":{"text":"var:preset|color|lig-muted"}}} -->
-		<p class="has-text-color" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em;color:var(--wp--preset--color--lig-muted)">&copy; [year] &mdash; All rights reserved.</p>
+		<!-- Copyright line: bound to the ligature/copyright source (inc/bindings.php),
+		     which composes "© {current year} {Site Title}. All rights reserved."
+		     in the site's locale and timezone. The fallback text is intentionally
+		     empty so no untranslatable English ships if the binding is unavailable
+		     (pre-WP-6.5). Requires WordPress 6.5+. -->
+		<!-- wp:paragraph {"className":"ligature-footer-fine","metadata":{"bindings":{"content":{"source":"ligature/copyright"}}},"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"}}} -->
+		<p class="ligature-footer-fine" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em"></p>
 		<!-- /wp:paragraph -->
-		<!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"},"color":{"text":"var:preset|color|lig-muted"}}} -->
-		<p class="has-text-color" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em;color:var(--wp--preset--color--lig-muted)">Built with <a href="https://wordpress.org" style="color:inherit">WordPress</a> &amp; Ligature</p>
+		<!-- Footer credit: bound to the ligature/footer-credit source, which reads
+		     the theme's own Name and Theme URI. Filter ligature/footer_credit to
+		     rewrite it, or return an empty string to remove it. Empty fallback so
+		     no untranslatable English ships. Requires WordPress 6.5+. -->
+		<!-- wp:paragraph {"className":"ligature-footer-fine","metadata":{"bindings":{"content":{"source":"ligature/footer-credit"}}},"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","letterSpacing":"0.04em"}}} -->
+		<p class="ligature-footer-fine" style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--2xs);letter-spacing:0.04em"></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
