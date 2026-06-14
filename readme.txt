@@ -2,10 +2,10 @@
 
 Contributors: thisismyurl
 Tags: portfolio, full-site-editing, block-patterns, two-columns, custom-colors, custom-logo, custom-menu, editor-style, featured-images, accessibility-ready, wide-blocks, translation-ready
-Tested up to: 7.0
+Tested up to: 6.8
 Requires at least: 6.5
-Requires PHP: 8.1
-Stable tag: 1.6163.2237
+Requires PHP: 7.4
+Stable tag: 1.6165.0948
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,15 +13,114 @@ A WordPress theme for brand identity studios. Newsreader for the case study feed
 
 == Description ==
 
-Ligature is a full-site-editing theme for brand identity studios — the independent consultancies, naming agencies, and visual identity practices that build what clients stand on. Named for the typographic character that joins two letterforms into one: the connection is the point.
+Ligature is a full-site-editing theme for brand identity studios — the independent consultancies, naming agencies, and visual identity practices that build what clients stand on.
 
-Newsreader brings editorial seriousness to the case study index and detail page. DM Sans keeps the interface layer clean and system-confident. The studio statement pattern is the first credential; the client roster is the second. Case studies close the argument.
+**The theme story.** A ligature is the typographic character where two letterforms join into one, and that join is the design thesis. The whole theme is a pairing of two voices: Newsreader brings editorial seriousness to the case study index and detail page; DM Sans keeps the interface layer clean and system-confident. The two meet the way a studio's authority and its craft meet — distinct, deliberate, joined. The name is the organizing principle, not a label.
+
+The studio statement pattern is the first credential; the client roster is the second. Case studies close the argument.
 
 The client roster pattern uses the WordPress Interactivity API for client-category filtering — visitors browse by sector without a page reload. The work is filterable; the trust is categorical.
 
-WCAG 2.2 AA accessible, Core Web Vitals optimised, self-hosted SIL OFL fonts, RTL-ready via CSS logical properties, zero plugin dependencies.
+Built for accessibility, Core Web Vitals, self-hosted SIL OFL fonts, and right-to-left languages, with zero plugin dependencies.
 
 **Signature patterns:** case-study-lead, work-index, studio-statement, client-roster (with Interactivity API filter), process-section, enquiry-cta, selected-work.
+
+== Accessibility ==
+
+Ligature is built to support WCAG 2.2 AA, but no theme can guarantee a compliant
+site on its own — your content, images, colour overrides, and chosen plugins all
+affect the result. What the theme ships:
+
+* A skip link to the main content on every page, rendered on wp_body_open with
+  a translatable label (inc/setup.php).
+* Visible focus outlines on links, buttons, and form controls (assets/css/core/base.css).
+* Semantic landmarks: one banner header, one main, one contentinfo footer per page.
+* Exactly one h1 per template, in logical heading order.
+* A prefers-reduced-motion guard on theme transitions.
+
+Run your finished site through an accessibility checker and your own keyboard and
+screen-reader testing before relying on any conformance level.
+
+== Right-to-left support ==
+
+Ligature uses CSS logical properties (margin-inline, padding-inline, inset, etc.)
+rather than physical left/right rules, so layouts mirror in RTL locales. WordPress
+6.7+ handles block-level direction conversion automatically. If RTL rendering looks
+wrong, confirm you are on WordPress 6.7+ and that your browser supports CSS logical
+properties. The print stylesheet (assets/css/core/print.css) keeps a few physical
+left/right rules for blockquote indentation; these affect print output only.
+
+== Compatibility ==
+
+* Requires WordPress 6.5 or later and PHP 7.4 or later.
+* The footer copyright and credit lines use block bindings, which require
+  WordPress 6.5+. On older WordPress the bound paragraphs render empty rather
+  than showing untranslated fallback text.
+* The client-roster pattern's sector filter uses the WordPress Interactivity
+  API (stable since WordPress 6.5). The full roster is visible without
+  JavaScript; the filter is progressive enhancement.
+
+== Build your own theme on this core ==
+
+Ligature is more than a finished theme — it is a working reference for the
+Colophon CORE/SKIN architecture. Everything portable (skip link, asset enqueue,
+block bindings, the Get started screen, content-width resolution) lives in the
+CORE files under inc/ and carries no Ligature-specific opinion. Everything that
+makes Ligature look like Ligature (the Newsreader/DM Sans pairing, image crops,
+block styles, pattern categories, the Interactivity-API roster) lives in one
+SKIN file, inc/skin.php.
+
+To start a new theme on the same core: copy the theme, change the slug prefix in
+inc/bootstrap.php once, and rewrite inc/skin.php. The CORE files re-prefix
+themselves from that single declaration; you never touch them. Six documented
+filters (listed below) cover the customisation a downstream developer reaches
+for first, so the common cases need no core edit at all.
+
+== Developer notes ==
+
+Ligature is built on the Colophon CORE/SKIN architecture, designed so a new
+theme can be re-skinned from a single re-prefix point. The portable
+infrastructure — setup, asset enqueue, block bindings — lives in the [CORE]
+files under inc/ and is regenerated by the colophon CLI on every sync; the
+slug prefix is declared once in inc/bootstrap.php and flows through every
+handle, hook, and binding. Ligature's own personality (image crops, fonts,
+block styles, pattern categories) lives in the one [SKIN] file the CLI never
+overwrites, inc/skin.php. Everything a downstream developer needs to bend the
+theme is exposed through documented filters (see below) — no core edit
+required.
+
+Version source-of-truth hierarchy: colophon.json holds the canonical version
+for the CLI; inc/bootstrap.php's VERSION constant is the runtime source; and
+style.css plus this readme's Stable tag are the WordPress.org-facing copies.
+The CLI keeps all four in sync — they must match exactly before submission.
+
+The Get started screen links to a developer guide. You can repoint that link with
+the `ligature/developer_guide_url` filter — useful when building your own theme on
+the Colophon core and hosting your own documentation. Example (PHP 7.4 compatible):
+
+`
+add_filter(
+    'ligature/developer_guide_url',
+    function ( $url ) {
+        return 'https://example.com/my-theme-guide/';
+    }
+);
+`
+
+Other public filters: `ligature/copyright_date_format` (footer copyright year
+format), `ligature/copyright_text` (the full copyright line), `ligature/footer_credit`
+(the footer credit line — return an empty string to remove it), and
+`ligature/get_started_content` (the Get started page content).
+
+== Demo content ==
+
+The bundled patterns ship with placeholder demo content — a studio name
+(Ligature & Co), a featured case study (Meridian Capital), and example links
+(`/work`, `/work/meridian-capital`, and a `mailto:hello@yourstudio.com` enquiry
+address). These are starting points, not live links: repoint each button and link
+to your own pages and email address after inserting the pattern. On a fresh install
+the demo links resolve to pages you have not created yet, so update them before
+publishing.
 
 == Installation ==
 
@@ -54,16 +153,69 @@ Newsreader and DM Sans are bundled as WOFF2 files in assets/fonts/ and loaded vi
 
 == Changelog ==
 
+= 1.6165.0948 =
+* Accessibility (WCAG 2.2 AA contrast): completed an exhaustive contrast audit
+  across the default palette and all five style variations (Canvas, Folio,
+  Leaded, Midnight Brief, Proof), computing every text/background pair against
+  its actual rendered ground. Several variations carried hidden failures because
+  some colour tokens invert per edition while the surfaces bound to them assumed
+  a fixed light or dark ground. Fixed:
+  * Leaded and Proof bound the body to a near-background tone (lig-rule ground
+    with lig-paper text), rendering body copy, headings, code, and post terms at
+    roughly 1.3:1. Both now use the standard lig-paper ground / lig-ink text
+    binding and gained the heading, link, button, and block colour rules they
+    were missing.
+  * The footer and studio-statement bands were bound to the per-edition
+    lig-overlay / lig-white tokens, which inverted to light-on-light in Proof and
+    dark-on-dark in Midnight Brief. Both bands are now pinned to an
+    edition-stable dark ground with pinned light and muted text, so their
+    contrast holds in every variation.
+  * The skip link, the primary and footer call-to-action buttons, the client-
+    roster filter buttons, the 404 numerals, and the post-meta category terms
+    were each bound to a token that inverts independently of its ground. Each now
+    uses an edition-stable pairing or its inverting partner token.
+  * Darkened or lightened lig-muted in every palette (it failed as body text
+    around 3.2–4.3:1) and corrected the Canvas and Proof accent so links and
+    interface accents clear 4.5:1 on their own ground.
+  After this pass, every normal-size text pair clears 4.5:1 and every large-text
+  and UI pair clears 3:1 in all six editions. Decorative hairlines (opacity
+  <= 0.3) are exempt and unchanged.
+* Submission hygiene: repointed the Theme URI to the verified author page,
+  normalised all text files to LF line endings, and synced the version across
+  style.css, this readme's Stable tag, inc/bootstrap.php, and colophon.json.
+
 = 1.6163.2237 =
 * Accessibility (WCAG 2.1 1.3.1): the archive and search titles are now explicit
   h1 headings; the index template gains an h1 page heading; the blank-canvas page
   template gains an empty, editor-fillable h1. (Front page and 404 already had one.)
-* Hardened comment-form attribute injection: a guarded preg_replace (single
-  replacement, null-check, no-match fallback) replaces a naive str_replace that
-  could double-inject or mangle markup.
-* oEmbed content width now reads theme.json contentSize (pixel-validated, 720px
-  fallback) instead of a hardcoded literal.
-* The Get started developer-guide URL is filterable via ligature/developer_guide_url.
+* Internationalisation: removed hardcoded English visitor prose from the 404 and
+  search templates (the "this page doesn't exist" line, the "Search Results"
+  eyebrow, and the "no results found" line). Each state now relies on the
+  heading, the search form, and the home link — so the templates ship no
+  untranslatable English.
+* Footer: the copyright and "Built with" credit lines are now block-binding
+  paragraphs (ligature/copyright and ligature/footer-credit) with empty
+  fallbacks, replacing a hardcoded "[year]" placeholder and a hardcoded English
+  credit line. The credit is removable via the ligature/footer_credit filter.
+* Documentation: reframed the WCAG 2.2 AA wording as "built to support" with a
+  listed evidence set (skip link, focus outlines, landmarks, single h1,
+  reduce-motion guard); documented the ligature/developer_guide_url filter with a
+  PHP 7.4-compatible example; documented the RTL logical-properties approach with
+  the print-stylesheet caveat.
+* Interactivity API: the client-roster sector filter now registers a real
+  view script module and store (callbacks.init/filter, state.activeFilter), and
+  every roster card binds its visibility to the active filter. The buttons
+  filter clients client-side; the full roster still renders without JavaScript.
+* Requirements: lowered the stated minimum to PHP 7.4 (the code uses no PHP 8.x
+  syntax) and set "Tested up to" to 6.8.
+* Version: style.css, readme.txt Stable tag, inc/bootstrap.php VERSION, and
+  colophon.json are synced to 1.6163.2237.
+
+Compatibility:
+* Requires WordPress 6.5+ and PHP 7.4+.
+* The footer copyright and credit lines use block bindings, which require
+  WordPress 6.5+. On older WordPress the bound paragraphs render empty rather
+  than showing untranslated fallback text.
 
 = 1.158.1749 =
 * Initial release.

@@ -23,6 +23,8 @@
 	<p class="ligature-hero__lede" style="margin-top:var(--wp--preset--spacing--7);font-family:var(--wp--preset--font-family--dm-sans);font-weight:400;font-size:var(--wp--preset--font-size--lg);line-height:1.6;color:var(--wp--preset--color--lig-secondary)">We design wordmarks, typefaces, and identity systems for organisations that want their name to carry weight on every surface it touches.</p>
 	<!-- /wp:paragraph -->
 
+	<!-- Demo links: repoint "See Our Work" (/work) and "Start a Project" (/contact)
+	     to your own pages after inserting the pattern. -->
 	<!-- wp:buttons {"className":"ligature-hero__actions","style":{"spacing":{"margin":{"top":"var:preset|spacing|9"},"blockGap":"var:preset|spacing|4"}}} -->
 	<div class="wp-block-buttons ligature-hero__actions" style="margin-top:var(--wp--preset--spacing--9)">
 

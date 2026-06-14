@@ -5,8 +5,15 @@
  * Categories: ligature-about
  * Viewport Width: 1280
  * Inserter: true
- * Description: Filterable client grid using the WordPress Interactivity API. Category filter buttons (All, Fintech, Retail, Healthcare, Media) toggle visible clients via data-wp-bind--hidden. Full roster visible without JavaScript.
+ * Description: Filterable client grid using the WordPress Interactivity API. Sector filter buttons (All, Fintech, Retail, Media) toggle visible clients via data-wp-bind--hidden. Full roster visible without JavaScript. The filter labels and client names are placeholder demo content — edit the buttons and cards to match your own sectors after inserting the pattern.
  */
+
+// Load the Interactivity API view module only on pages that render this pattern.
+// The module is registered in inc/skin.php; on pre-6.5 installs the function is
+// absent and the roster stays a static, fully-visible grid.
+if ( function_exists( 'wp_enqueue_script_module' ) ) {
+	wp_enqueue_script_module( 'ligature-client-roster' );
+}
 ?>
 <!-- wp:group {"className":"ligature-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16","left":"var:preset|spacing|5","right":"var:preset|spacing|5"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group ligature-section" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16);padding-left:var(--wp--preset--spacing--5);padding-right:var(--wp--preset--spacing--5)">
@@ -26,17 +33,20 @@
 	<!-- wp:html -->
 	<div
 		data-wp-interactive="ligature-client-roster"
+		data-wp-context='{"activeFilter":"all"}'
 		data-wp-init="callbacks.init"
 		style="margin-top:var(--wp--preset--spacing--8)"
 	>
-		<!-- Filter buttons -->
-		<div role="group" aria-label="Filter clients by sector" style="display:flex;flex-wrap:wrap;gap:var(--wp--preset--spacing--3);margin-bottom:var(--wp--preset--spacing--8)">
+		<!-- Filter buttons. Placeholder labels (All / Fintech / Retail / Media) —
+		     replace each button's text and matching data-filter value, and the
+		     cards' data-sector values, with your own sectors. -->
+		<div role="group" aria-label="<?php esc_attr_e( 'Filter clients by sector', 'ligature' ); ?>" style="display:flex;flex-wrap:wrap;gap:var(--wp--preset--spacing--3);margin-bottom:var(--wp--preset--spacing--8)">
 			<button
 				class="wp-element-button"
 				data-wp-on--click="callbacks.filter"
 				data-filter="all"
 				data-wp-class--is-active="state.activeFilter === 'all'"
-				style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--sm);font-weight:500;background:var(--wp--preset--color--lig-ink);color:var(--wp--preset--color--lig-white);border:1px solid var(--wp--preset--color--lig-ink);padding:0.5rem 1.25rem;cursor:pointer;border-radius:0"
+				style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--sm);font-weight:500;background:var(--wp--preset--color--lig-ink);color:var(--wp--preset--color--lig-paper);border:1px solid var(--wp--preset--color--lig-ink);padding:0.5rem 1.25rem;cursor:pointer;border-radius:0"
 			>All</button>
 			<button
 				class="wp-element-button"
@@ -63,35 +73,35 @@
 
 		<!-- Client grid -->
 		<div class="ligature-client-roster">
-			<div class="ligature-client-card" data-sector="fintech" data-wp-bind--hidden="!state.showClient" data-wp-context='{"sector":"fintech"}'>
+			<div class="ligature-client-card" data-sector="fintech" data-wp-context='{"sector":"fintech"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Meridian Capital</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Fintech</p>
 			</div>
-			<div class="ligature-client-card" data-sector="media">
+			<div class="ligature-client-card" data-sector="media" data-wp-context='{"sector":"media"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Folio Press</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Media</p>
 			</div>
-			<div class="ligature-client-card" data-sector="retail">
+			<div class="ligature-client-card" data-sector="retail" data-wp-context='{"sector":"retail"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">North Collective</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Retail</p>
 			</div>
-			<div class="ligature-client-card" data-sector="media">
+			<div class="ligature-client-card" data-sector="media" data-wp-context='{"sector":"media"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Beacon Media</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Media</p>
 			</div>
-			<div class="ligature-client-card" data-sector="fintech">
+			<div class="ligature-client-card" data-sector="fintech" data-wp-context='{"sector":"fintech"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Render Labs</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Fintech</p>
 			</div>
-			<div class="ligature-client-card" data-sector="retail">
+			<div class="ligature-client-card" data-sector="retail" data-wp-context='{"sector":"retail"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Common Ground</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Retail</p>
 			</div>
-			<div class="ligature-client-card" data-sector="media">
+			<div class="ligature-client-card" data-sector="media" data-wp-context='{"sector":"media"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Aperture Health</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Media</p>
 			</div>
-			<div class="ligature-client-card" data-sector="fintech">
+			<div class="ligature-client-card" data-sector="fintech" data-wp-context='{"sector":"fintech"}' data-wp-bind--hidden="state.isHidden">
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-weight:500;font-size:var(--wp--preset--font-size--base);text-align:center;color:var(--wp--preset--color--lig-ink)">Lumen Data</p>
 				<p style="font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--xs);text-align:center;color:var(--wp--preset--color--lig-muted);margin-top:0.25rem">Fintech</p>
 			</div>

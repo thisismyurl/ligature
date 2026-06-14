@@ -22,8 +22,14 @@
 			<p class="is-style-lig-overline" style="color:rgba(255,255,255,0.5);margin-bottom:var(--wp--preset--spacing--5)">Brand Identity Studio</p>
 			<!-- /wp:paragraph -->
 
-			<!-- wp:heading {"level":1,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|display","lineHeight":"1.0","letterSpacing":"-0.025em"},"color":{"text":"var:preset|color|lig-white"}}} -->
-			<h1 style="font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--display);line-height:1.0;letter-spacing:-0.025em;color:var(--wp--preset--color--lig-white)">Your Studio Name</h1>
+			<!-- This heading is the front page's single h1 (level:1); front-page.html
+			     documents that the page title is sourced here. The demo name is a
+			     placeholder the editor replaces with the studio's own. The heading
+			     colour comes from the edition-stable .ligature-band--overlay rule,
+			     not a colour token (lig-white inverts to a dark value in some
+			     editions and would vanish on this dark band). -->
+			<!-- wp:heading {"level":1,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|display","lineHeight":"1.0","letterSpacing":"-0.025em"}}} -->
+			<h1 style="font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--display);line-height:1.0;letter-spacing:-0.025em">Ligature &amp; Co</h1>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|8"}},"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontWeight":"400","fontSize":"var:preset|font-size|lg","lineHeight":"1.6"},"color":{"text":"rgba(247,246,243,0.8)"}}} -->
@@ -43,8 +49,10 @@
 				<!-- wp:paragraph {"className":"is-style-lig-overline","style":{"color":{"text":"rgba(255,255,255,0.4)"},"spacing":{"margin":{"bottom":"var:preset|spacing|4"}}}} -->
 				<p class="is-style-lig-overline" style="color:rgba(255,255,255,0.4);margin-bottom:var(--wp--preset--spacing--4)">Disciplines</p>
 				<!-- /wp:paragraph -->
-				<!-- wp:list {"className":"is-style-lig-credential-list","style":{"color":{"text":"var:preset|color|lig-white"}}} -->
-				<ul class="is-style-lig-credential-list has-lig-white-color has-text-color">
+				<!-- On the dark overlay band the credential list takes its colour from
+				     the edition-stable .ligature-band--overlay rule, not lig-white. -->
+				<!-- wp:list {"className":"is-style-lig-credential-list"} -->
+				<ul class="is-style-lig-credential-list">
 					<li>Brand Strategy &amp; Naming</li>
 					<li>Visual Identity Systems</li>
 					<li>Brand Architecture</li>

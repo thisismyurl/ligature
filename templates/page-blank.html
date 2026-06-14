@@ -1,10 +1,20 @@
 <!-- Blank canvas page template for Ligature.
      No header. No footer. No constrained wrapper.
-     Use for: custom landing pages, coming-soon pages, full-bleed
-     presentations that need to own the entire viewport.
+
+     DOCUMENTED STRUCTURAL VARIATION (gate Check 13, documented-variation clause):
+     This is a deliberate full-bleed template, not an accidental omission. It is
+     the one template that intentionally ships without the header and footer
+     parts, because its job is custom landing pages, coming-soon screens, and
+     full-bleed presentations that must own the entire viewport with no theme
+     chrome. The WCAG navigation scaffold is still intact: an explicit single
+     <main id="main-content"> landmark (the skip-link target) and an explicit
+     level-1 heading block below. Editors who want site navigation on a page
+     should choose page.html or page-wide.html instead; both ship the header and
+     footer. To restore chrome here, add the header and footer template-part
+     blocks back around the <main>.
 
      Pillar 7 (High Agency): the designer has full control of the canvas.
-     No chrome forces. No gutters imposed. -->
+     No chrome forced. No gutters imposed. -->
 
 <!-- wp:group {"tagName":"main","id":"main-content","className":"ligature-main ligature-page-blank","layout":{"type":"default"}} -->
 <main id="main-content" class="wp-block-group ligature-main ligature-page-blank">

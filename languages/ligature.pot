@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Ligature package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ligature 1.6148\n"
+"Project-Id-Version: Ligature 1.6163.2237\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/ligature\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-04T00:00:00+00:00\n"
+"POT-Creation-Date: 2026-06-13T00:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.x\n"
 "X-Domain: ligature\n"
@@ -23,7 +23,7 @@ msgid "https://thisismyurl.com/ligature/"
 msgstr ""
 
 #. Description of the theme
-msgid "A typography-first full-site-editing theme for type foundries, brand identity studios, and independent designers."
+msgid "A WordPress theme for brand identity studios — the independent consultancies, naming agencies, and visual identity practices that build what clients stand on. Newsreader for editorial authority in the case study feed; DM Sans for the clean, system-confident interface layer. The portfolio index earns trust; the case study page closes it. Built on the Colophon core: built to support WCAG 2.2 AA, Core Web Vitals, self-hosted SIL OFL fonts, right-to-left languages via CSS logical properties, and zero plugin dependencies."
 msgstr ""
 
 #. Author of the theme
@@ -34,6 +34,18 @@ msgstr ""
 msgid "https://thisismyurl.com/"
 msgstr ""
 
+#: inc/setup.php
+msgid "Primary Navigation"
+msgstr ""
+
+#: inc/setup.php
+msgid "Footer Navigation"
+msgstr ""
+
+#: inc/setup.php
+msgid "Skip to content"
+msgstr ""
+
 #: inc/bindings.php
 msgid "Copyright line"
 msgstr ""
@@ -42,38 +54,75 @@ msgstr ""
 msgid "Footer credit line"
 msgstr ""
 
-#: inc/bindings.php
 #. translators: 1: four-digit year, 2: site title.
+#: inc/bindings.php
 msgid "© %1$s %2$s. All rights reserved."
 msgstr ""
 
-#: inc/bindings.php
 #. translators: %s: linked theme name.
+#: inc/bindings.php
 msgid "Built with the %s theme."
 msgstr ""
 
 #: inc/skin.php
-msgid "Eyebrow label"
+msgid "Overline"
 msgstr ""
 
 #: inc/skin.php
-msgid "Specimen annotation"
+msgid "Pull quote"
 msgstr ""
 
 #: inc/skin.php
-msgid "Directory entry"
+msgid "Process stage"
 msgstr ""
 
 #: inc/skin.php
-msgid "Mark card"
+msgid "Credential list"
 msgstr ""
 
 #: inc/skin.php
-msgid "Specimen display"
+msgid "Case study meta"
 msgstr ""
 
-#: inc/admin.php
+#: inc/skin.php
+msgid "Ligature: Studio"
+msgstr ""
+
+#: inc/skin.php
+msgid "Studio identity, statements, and homepage patterns."
+msgstr ""
+
+#: inc/skin.php
+msgid "Ligature: Work"
+msgstr ""
+
+#: inc/skin.php
+msgid "Case studies, portfolio index, and selected-work patterns."
+msgstr ""
+
+#: inc/skin.php
+msgid "Ligature: About"
+msgstr ""
+
+#: inc/skin.php
+msgid "Process, client roster, and studio credential patterns."
+msgstr ""
+
+#: inc/skin.php
+msgid "Ligature: Contact"
+msgstr ""
+
+#: inc/skin.php
+msgid "Enquiry CTA and contact patterns."
+msgstr ""
+
 #. translators: %s: theme name.
+#: inc/admin.php
+msgid "%s: Get started"
+msgstr ""
+
+#. translators: %s: theme name.
+#: inc/admin.php
 msgid "Welcome to %s."
 msgstr ""
 
@@ -81,8 +130,8 @@ msgstr ""
 msgid "Thanks for giving it a home. A few small steps will have your site reading the way it should."
 msgstr ""
 
-#: inc/admin.php
 #. translators: %s: theme name.
+#: inc/admin.php
 msgid "Set up %s →"
 msgstr ""
 
@@ -94,9 +143,62 @@ msgstr ""
 msgid "You do not have permission to do that."
 msgstr ""
 
-#: inc/admin.php
 #. translators: %s: theme name.
-msgid "%s: Get started"
+#: inc/admin.php
+msgid "%s is a free, full-site-editing theme built to get out of the way of your content. Here is how to make it yours."
+msgstr ""
+
+#: inc/admin.php
+msgid "Choose what people land on."
+msgstr ""
+
+#: inc/admin.php
+msgid "A visitor's first second decides whether they stay. Set a static front page under Settings → Reading, and give your posts a page of their own."
+msgstr ""
+
+#: inc/admin.php
+msgid "Give people a way around."
+msgstr ""
+
+#: inc/admin.php
+msgid "A site without a menu is a room without doors. Open the Site Editor, edit the header, and assign your menu to Primary Navigation."
+msgstr ""
+
+#: inc/admin.php
+msgid "Start from a pattern, not a blank page."
+msgstr ""
+
+#: inc/admin.php
+msgid "In any page or post, open the block inserter, choose Patterns, and find this theme's group. Drop one in and change the words."
+msgstr ""
+
+#: inc/admin.php
+msgid "Make it sound like you."
+msgstr ""
+
+#: inc/admin.php
+msgid "In the Site Editor, open Styles to change colours and typefaces. Nothing you do there can break the theme — experiment freely."
+msgstr ""
+
+#: inc/admin.php
+msgid "This theme is already fast by design: zero front-end JavaScript, self-hosted fonts that don't phone home, and tuning against the Core Web Vitals search engines actually measure."
+msgstr ""
+
+#: inc/admin.php
+msgid "It's built to support WCAG 2.2 AA — real focus outlines, a skip link, sensible heading order, and motion that respects a reduce-motion setting. Keep your own copy and images to that bar and the whole site stays welcoming."
+msgstr ""
+
+#: inc/admin.php
+msgid "There's a small credit in your footer. It's a thank-you, not a tax — remove it in two clicks in the Site Editor → Footer, or filter it out in code. No hard feelings either way."
+msgstr ""
+
+#. translators: %s: linked developer-guide anchor.
+#: inc/admin.php
+msgid "This theme is built on Colophon, a small documented core meant to be reused. The %s walks through how to build your own theme on it."
+msgstr ""
+
+#: inc/admin.php
+msgid "developer guide"
 msgstr ""
 
 #: inc/admin.php
@@ -115,14 +217,6 @@ msgstr ""
 msgid "For developers"
 msgstr ""
 
-#: patterns/mark-presentation.php
-msgid "Your studio mark — replace this image"
-msgstr ""
-
-#: patterns/mark-presentation.php
-msgid "Studio mark — replace with your mark image"
-msgstr ""
-
-#: patterns/case-study-lead.php
-msgid "Project hero image — replace with your case study photography"
+#: patterns/client-roster.php
+msgid "Filter clients by sector"
 msgstr ""

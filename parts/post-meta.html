@@ -1,12 +1,15 @@
 <!-- Post meta template part for Ligature.
-     Used on single posts and in archive entries. Design: Jakarta at xs
+     Used on single posts and in archive entries. Design: DM Sans at xs
      size, studio-mid colour, flex row with a light separator. Reads like
      a caption in a design publication: date · category · author. -->
 
 <!-- wp:group {"className":"ligature-post-meta","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|3"}}} -->
 <div class="wp-block-group ligature-post-meta">
 
-	<!-- wp:post-terms {"term":"category","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","fontWeight":"600","letterSpacing":"0.12em","textTransform":"uppercase"},"color":{"text":"var:preset|color|lig-overlay"}}} /-->
+	<!-- Category terms use lig-secondary, not lig-overlay: overlay is a near-
+	     background tone that inverts per edition and went dark-on-dark / light-on-
+	     light in the dark and Proof editions. Secondary stays high-contrast text. -->
+	<!-- wp:post-terms {"term":"category","style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|2xs","fontWeight":"600","letterSpacing":"0.12em","textTransform":"uppercase"},"color":{"text":"var:preset|color|lig-secondary"}}} /-->
 
 	<!-- wp:post-date {"style":{"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|xs"},"color":{"text":"var:preset|color|lig-muted"}}} /-->
 

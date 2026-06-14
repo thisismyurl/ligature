@@ -64,9 +64,16 @@ body {
 
 	:root {
 		--cl-focus-ring:         var(--wp--preset--color--lig-signal);
-		--cl-focus-ring-inverse: var(--wp--preset--color--lig-white);
-		--cl-skip-bg:            var(--wp--preset--color--lig-signal);
-		--cl-skip-fg:            var(--wp--preset--color--lig-white);
+		--cl-focus-ring-inverse: #f7f6f3;
+		/*
+		 * Skip link is pinned to an edition-stable dark ground + light text.
+		 * Binding it to lig-signal / lig-white broke in the editions where the
+		 * accent is a light gold (Canvas, Leaded, Proof) — white-on-gold dropped
+		 * below 4.5:1. The skip link must clear contrast in every variation, so it
+		 * never resolves through a per-edition token.
+		 */
+		--cl-skip-bg:            #16150f;
+		--cl-skip-fg:            #f7f6f3;
 	}
 
 	/* Work-index: single column on mobile, 2-col grid at md */
@@ -248,13 +255,39 @@ body {
 
 	.ligature-band--surface { background: var(--wp--preset--color--lig-surface); }
 
+	/*
+	 * Overlay band — EDITION-STABLE dark ground.
+	 *
+	 * The footer and studio-statement sit on this band and write light text on
+	 * it. Binding the ground to the variation's --lig-overlay token broke in the
+	 * editions where overlay inverts to a light tone (Proof's overlay is #E4DECE;
+	 * Midnight Brief's is #2A2A2E against a #1A1A1E "white"), producing
+	 * light-on-light and dark-on-dark. The band is therefore pinned to fixed dark
+	 * literals so its contrast holds in every variation; the light-text and
+	 * muted-text values below are pinned to match. Text on this band never
+	 * resolves through --lig-white / --lig-muted, which both invert per edition.
+	 */
 	.ligature-band--overlay {
-		background: var(--wp--preset--color--lig-overlay);
-		color: var(--wp--preset--color--lig-white);
+		background: #16150f;
+		color: #f7f6f3;
 		--cl-focus-ring: var(--cl-focus-ring-inverse);
 	}
-	.ligature-band--overlay a { color: var(--wp--preset--color--lig-white); }
-	.ligature-band--overlay a:hover { color: var(--wp--preset--color--lig-rule); }
+	.ligature-band--overlay :where(h1, h2, h3, h4, h5, h6),
+	.ligature-band--overlay .wp-block-site-title a { color: #f7f6f3; }
+	/* Quiet labels on the band (tagline, copyright, credit) — pinned, 6.5:1 */
+	.ligature-band--overlay .wp-block-site-tagline,
+	.ligature-band--overlay .ligature-footer-fine { color: #9c9a95; }
+	/* Plain links on the band invert to light; buttons keep their own
+	   background/text pairing (the CTA button is signal-grounded). */
+	.ligature-band--overlay a:not(.wp-block-button__link):not(.wp-element-button) { color: #f7f6f3; }
+	.ligature-band--overlay a:not(.wp-block-button__link):not(.wp-element-button):hover { color: #c9c7c1; }
+	/*
+	 * Components whose base rule pins a per-edition token with !important
+	 * (credential list -> lig-ink, overline -> lig-muted) need an equally strong
+	 * band-scoped override so they stay legible on the pinned dark ground.
+	 */
+	.ligature-band--overlay .is-style-lig-credential-list li { color: #f7f6f3 !important; }
+	.ligature-band--overlay .is-style-lig-overline { color: #b8b6b1 !important; }
 
 	.ligature-band--signal-tint { background: var(--wp--preset--color--lig-signal-tint); }
 
