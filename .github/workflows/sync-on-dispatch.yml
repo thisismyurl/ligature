@@ -1,0 +1,121 @@
+name: Sync core files from Colophon
+
+on:
+  repository_dispatch:
+    types: [colophon-sync]
+  workflow_dispatch:
+    inputs:
+      core_ref:
+        description: 'Colophon core branch or SHA to sync from'
+        required: false
+        default: 'main'
+      reason:
+        description: 'Why this sync is being run (shown in the sync PR body)'
+        required: false
+        default: 'Manual trigger'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout derived theme
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.COLOPHON_SYNC_TOKEN }}
+
+      - name: Checkout Colophon core
+        uses: actions/checkout@v4
+        with:
+          repository: thisismyurl/colophon
+          ref: ${{ github.event.client_payload.core_sha || inputs.core_ref || 'main' }}
+          path: .colophon-core
+          token: ${{ secrets.COLOPHON_SYNC_TOKEN }}
+
+      - name: Read theme slug from colophon.json
+        id: meta
+        run: |
+          SLUG=$(jq -r '.slug' colophon.json)
+          VERSION=$(jq -r '.version' colophon.json)
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Copy and substitute core files
+        run: |
+          SLUG="${{ steps.meta.outputs.slug }}"
+
+          # Mirrors colophon.manifest.json → core[] list
+          CORE_FILES=(
+            "functions.php"
+            "inc/bootstrap.php"
+            "inc/setup.php"
+            "inc/assets.php"
+            "inc/bindings.php"
+            "inc/admin.php"
+            "inc/cli.php"
+            "inc/github-updater.php"
+            "assets/css/core/reset.css"
+            "assets/css/core/base.css"
+            "assets/css/core/print.css"
+          )
+
+          for f in "${CORE_FILES[@]}"; do
+            if [ -f ".colophon-core/$f" ]; then
+              mkdir -p "$(dirname "$f")"
+              sed \
+                -e "s/namespace Colophon;/namespace ${SLUG};/g" \
+                -e "s/'colophon/'${SLUG}/g" \
+                -e "s/@package colophon/@package ${SLUG}/g" \
+                -e "s/colophon-/${SLUG}-/g" \
+                -e "s/\`colophon\/\`${SLUG}\//g" \
+                -e "s/wp colophon /wp ${SLUG} /g" \
+                ".colophon-core/$f" > "$f"
+              echo "  synced: $f"
+            fi
+          done
+
+          rm -rf .colophon-core
+
+      - name: Update colophon_version in colophon.json
+        run: |
+          CORE_VERSION=$(jq -r '.version' colophon.json 2>/dev/null || echo 'unknown')
+          jq --arg v "${{ github.event.client_payload.core_sha || 'manual' }}" \
+            '.colophon_version = $v' colophon.json > colophon.json.tmp
+          mv colophon.json.tmp colophon.json
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No core changes detected — already up to date."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            git diff --stat
+          fi
+
+      - name: Create sync PR
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          BRANCH="colophon-sync-${{ github.run_id }}"
+          git config user.name "colophon-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "chore: sync core files from colophon @ ${{ github.event.client_payload.core_sha || 'manual' }}"
+          git push origin "$BRANCH"
+          printf '%s\n' \
+            "Automated sync of shared core files from [thisismyurl/colophon](https://github.com/thisismyurl/colophon)." \
+            "" \
+            "**Triggered by:** ${{ github.event.client_payload.triggered_by || 'manual dispatch' }}" \
+            "**Core SHA:** \`${{ github.event.client_payload.core_sha || 'manual' }}\`" \
+            "**Reason:** ${{ github.event.client_payload.reason || inputs.reason || 'Manual trigger' }}" \
+            "" \
+            "Review the diff before merging. Scaffold files (\`inc/skin.php\`, \`theme.json\`, \`style.css\`, all templates) are never touched by this sync." \
+            > /tmp/pr-body.md
+          gh pr create \
+            --title "Core sync from colophon" \
+            --body-file /tmp/pr-body.md \
+            --base main \
+            --head "$BRANCH"
+        env:
+          GH_TOKEN: ${{ secrets.COLOPHON_SYNC_TOKEN }}
