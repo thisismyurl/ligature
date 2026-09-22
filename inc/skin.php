@@ -16,8 +16,6 @@
  * @package ligature
  */
 
-namespace Ligature;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -27,12 +25,12 @@ defined( 'ABSPATH' ) || exit;
  * case-card: 3:2 — work-index card thumbnail.
  * portrait:  1:1 — maker portrait or client logo in the roster.
  */
-function skin_image_sizes(): void {
+function ligature_skin_image_sizes(): void {
 	add_image_size( 'ligature-case-hero', 1200, 675, true );   // 16:9 case study opener.
 	add_image_size( 'ligature-case-card', 760, 507, true );    // 3:2 work-index card.
 	add_image_size( 'ligature-portrait', 600, 600, true );     // 1:1 maker portrait.
 }
-add_action( 'after_setup_theme', __NAMESPACE__ . '\\skin_image_sizes' );
+add_action( 'after_setup_theme', 'ligature_skin_image_sizes' );
 
 /**
  * Preload Newsreader 400 — the LCP-critical font on every Ligature page.
@@ -59,7 +57,7 @@ add_filter(
  *
  * Pillar 7 (High Agency): editors can apply these without developer help.
  */
-function skin_block_styles(): void {
+function ligature_skin_block_styles(): void {
 
 	// [SKIN] Paragraph as an overline — DM Sans 500, tracked, all-caps, lig-muted.
 	// Used above section headings in studio-statement and case-study-lead.
@@ -111,7 +109,7 @@ function skin_block_styles(): void {
 		)
 	);
 }
-add_action( 'init', __NAMESPACE__ . '\\skin_block_styles' );
+add_action( 'init', 'ligature_skin_block_styles' );
 
 /**
  * Register the client-roster Interactivity API view module.
@@ -127,7 +125,7 @@ add_action( 'init', __NAMESPACE__ . '\\skin_block_styles' );
  *
  * @since 1.6163.2237
  */
-function register_client_roster_module(): void {
+function ligature_register_client_roster_module(): void {
 	if ( ! function_exists( 'wp_register_script_module' ) ) {
 		return;
 	}
@@ -135,13 +133,13 @@ function register_client_roster_module(): void {
 	$path = '/assets/js/client-roster.js';
 
 	wp_register_script_module(
-		SLUG . '-client-roster',
-		URI . $path,
+		LIGATURE_SLUG . '-client-roster',
+		LIGATURE_URI . $path,
 		array( '@wordpress/interactivity' ),
-		(string) filemtime( DIR . $path )
+		(string) filemtime( LIGATURE_DIR . $path )
 	);
 }
-add_action( 'init', __NAMESPACE__ . '\\register_client_roster_module' );
+add_action( 'init', 'ligature_register_client_roster_module' );
 
 /**
  * Register Ligature's block pattern categories.
@@ -149,7 +147,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_client_roster_module' );
  * Patterns auto-register from patterns/ (WordPress 6.0+). These categories
  * give them a clear home under "Ligature: …" in the pattern library.
  */
-function skin_pattern_categories(): void {
+function ligature_skin_pattern_categories(): void {
 
 	register_block_pattern_category(
 		'ligature-studio',
@@ -183,4 +181,4 @@ function skin_pattern_categories(): void {
 		)
 	);
 }
-add_action( 'init', __NAMESPACE__ . '\\skin_pattern_categories' );
+add_action( 'init', 'ligature_skin_pattern_categories' );

@@ -2,49 +2,38 @@
 /**
  * [CORE] Theme setup — feature supports, i18n, navigation, a11y scaffolding.
  *
- * Every value in this file is the same for every theme in the Colophon line —
- * it is the shared floor. Anything design-specific (image crop sizes, which
- * fonts to preload, block styles) lives in inc/skin.php instead, so this file
- * can be overwritten by `colophon sync` without ever clobbering a theme's
- * personality. The separation is intentional and load-bearing.
- *
- * Pillar 5 (Safe by Default): the WooCommerce guard and emoji removal are
- * here by default. The skip link lives in parts/header.html — one skip link
- * per theme, in the DOM, targeting #main-content.
- * Pillar 9 (Archaeological Records): [CORE] tag marks what the CLI owns.
+ * Every value in this file is the same for every theme in the line — it is the
+ * shared floor. Anything design-specific (image crop sizes, which fonts to
+ * preload, block styles) lives in inc/skin.php instead, so this file can be
+ * overwritten by `colophon sync` without ever clobbering a theme's personality.
  *
  * @package ligature
  */
-
-namespace Ligature;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Register theme feature supports, the text domain, and navigation menus.
  */
-function setup(): void {
+function ligature_setup(): void {
 
-	// i18n. The domain is the literal 'ligature' (a constant would break make-pot —
-	// see bootstrap.php); the path uses DIR so it travels with a re-skin. The
-	// CLI rewrites the literal when it generates a theme.
-	load_theme_textdomain( 'ligature', DIR . '/languages' );
+	// i18n. The domain is the literal 'ligature' (a constant would break
+	// make-pot — see bootstrap.php); the path uses LIGATURE_DIR so it travels with a
+	// re-skin. The CLI rewrites the literal when it generates a theme.
+	load_theme_textdomain( 'ligature', LIGATURE_DIR . '/languages' );
 
-	// Content width for oEmbeds. Reads from theme.json contentSize if set;
-	// otherwise defaults to 720px. This ensures oEmbeds respect the theme's reading column width.
-	$layout = wp_get_global_settings( array( 'layout' ) );
-	$content_width = 720; // Default fallback for all non-pixel or malformed values.
-
-	if ( isset( $layout['contentSize'] ) && is_string( $layout['contentSize'] ) ) {
-		// Trim whitespace and validate pixel-based format only ("XXXpx").
-		// Rejects viewport-relative (vw), calc(), clamp(), or other CSS functions.
-		$size = trim( $layout['contentSize'] );
-		if ( preg_match( '/^(\d+)px$/i', $size, $matches ) ) {
-			$content_width = (int) $matches[1];
-		}
-	}
-
-	$GLOBALS['content_width'] = $content_width;
+	/**
+	 * Filters the fallback content width for oEmbeds.
+	 *
+	 * The default 720 matches the reading-column contentSize in theme.json and
+	 * the single-post templates. A re-skin with a wider column should override this so
+	 * oEmbed providers (YouTube, Vimeo, Twitter) size their output correctly.
+	 *
+	 * @since 1.6150
+	 *
+	 * @param int $width Content width in pixels.
+	 */
+	$GLOBALS['content_width'] = (int) apply_filters( LIGATURE_SLUG . '/content_width', 720 );
 
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'editor-styles' );
@@ -66,92 +55,90 @@ function setup(): void {
 		)
 	);
 
+	/**
+	 * Filters the navigation menu registrations.
+	 *
+	 * Add, rename, or remove menu locations without editing core. The array
+	 * maps location slug => translatable label; every entry is passed directly
+	 * to register_nav_menus().
+	 *
+	 * @since 1.6150
+	 *
+	 * @param array $menus Location-slug => label pairs.
+	 */
 	register_nav_menus(
-		array(
-			'primary' => esc_html__( 'Primary Navigation', 'ligature' ),
-			'footer'  => esc_html__( 'Footer Navigation', 'ligature' ),
+		(array) apply_filters(
+			LIGATURE_SLUG . '/register_nav_menus',
+			array(
+				'primary' => esc_html__( 'Primary Navigation', 'ligature' ),
+				'footer'  => esc_html__( 'Footer Navigation', 'ligature' ),
+			)
 		)
 	);
 
 	/**
 	 * Fires after the theme has registered its supports and menus.
 	 *
-	 * Extension point for companion plugins and inc/skin.php to add supports,
-	 * image sizes, or menus without editing this CORE file.
+	 * The extension point for companion plugins and a theme's own inc/skin.php
+	 * to add supports, image sizes, or menus without editing core. Runs late on
+	 * after_setup_theme, so everything the theme declares is already in place.
 	 *
 	 * @since 1.0.0
 	 */
-	do_action( 'ligature/setup' );
+	do_action( LIGATURE_SLUG . '/setup' );
 }
-add_action( 'after_setup_theme', __NAMESPACE__ . '\\setup' );
+add_action( 'after_setup_theme', 'ligature_setup' );
 
 /**
- * Declare WooCommerce support.
+ * Declare minimum WooCommerce support so a shop renders without conflict.
  *
- * Ligature is not a shop design, but "not a shop design" must never mean "broken
- * shop." On a block theme, WooCommerce ships its own block-based fallback
- * templates and resolves them automatically; declaring support clears the
- * persistent admin notice and enables the product-gallery features.
+ * None of the themes in this line are shop designs — but "not a shop design"
+ * must never mean "broken shop." On a block theme, WooCommerce ships its own
+ * block-based fallback templates and resolves them automatically when the theme
+ * provides none, so layout is covered and the product pages inherit the theme's
+ * theme.json tokens. What is left is the support declaration: without it
+ * WooCommerce shows a persistent "theme does not declare WooCommerce support"
+ * notice and disables the product-gallery zoom/lightbox/slider. Declaring
+ * support (plus the three gallery features) clears the notice and lets the
+ * gallery work, with no template authoring.
  *
- * Guarded on the WooCommerce class so the declaration only fires when the
- * plugin is active — no dead code on the common case.
- *
- * Pillar 6 (Resilience): we handle the 'when', not the 'if'.
+ * Guarded on the WooCommerce class so the supports are only declared when the
+ * plugin is active.
  */
-function woocommerce_support(): void {
+function ligature_woocommerce_support(): void {
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		return;
 	}
+
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
 }
-add_action( 'after_setup_theme', __NAMESPACE__ . '\\woocommerce_support' );
+add_action( 'after_setup_theme', 'ligature_woocommerce_support' );
 
 /**
  * Register the editor stylesheet so the block editor mirrors the front end.
  *
  * The theme.json file supplies the editor's tokens and global styles; the editor sheet
- * carries only the ::before/::after and custom-block personality that
- * theme.json cannot express.
+ * carries only the ::before/::after personality theme.json cannot express. The
+ * file is skin-owned (assets/css/editor-style.css); a missing file is harmless.
  */
-function editor_styles(): void {
+function ligature_editor_styles(): void {
 	add_editor_style( array( 'assets/css/editor-style.css' ) );
 }
-add_action( 'after_setup_theme', __NAMESPACE__ . '\\editor_styles' );
-
-/**
- * Drop the emoji-detection script and its styles.
- *
- * Modern browsers render emoji natively. Core's polyfill is a render-blocking
- * inline script plus a stylesheet — dead weight on the critical path.
- * Removing it is a Core Web Vitals baseline improvement at zero cost.
- *
- * Pillar 2 (Innovation over Compliance): we don't ship dead weight because
- * it ships by default.
- */
-function disable_emoji_assets(): void {
-	// Front-end only — leave the admin emoji picker intact.
-	// Themes must not alter admin-area behaviour users haven't opted into.
-	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-}
-add_action( 'init', __NAMESPACE__ . '\\disable_emoji_assets' );
+add_action( 'after_setup_theme', 'ligature_editor_styles' );
 
 /**
  * Add autocomplete and enterkeyhint hints to the comment-form fields.
  *
  * Lets mobile keyboards offer the right input mode and autofill, and gives the
- * on-screen Enter key a sensible label — a small a11y + mobile-UX win at zero cost.
- *
- * Pillar 5 (Safe by Default): accessibility and mobile UX improvements are
- * on by default, not opt-in.
+ * on-screen Enter key a sensible label — a small a11y + mobile-UX win at no cost.
  *
  * @param array $fields The default comment-form field markup, keyed by field.
  * @return array The fields with input attributes added.
  */
-function comment_form_field_attributes( array $fields ): array {
+function ligature_comment_form_field_attributes( array $fields ): array {
 	$attributes = array(
 		'author' => 'autocomplete="name" enterkeyhint="next"',
 		'email'  => 'autocomplete="email" inputmode="email" enterkeyhint="next"',
@@ -186,25 +173,5 @@ function comment_form_field_attributes( array $fields ): array {
 
 	return $fields;
 }
-add_filter( 'comment_form_default_fields', __NAMESPACE__ . '\\comment_form_field_attributes' );
+add_filter( 'comment_form_default_fields', 'ligature_comment_form_field_attributes' );
 
-/**
- * Print the skip-to-content link at the very top of the document body.
- *
- * Rendered in PHP (not in parts/header.html) for one reason: the label must be
- * translatable, and a static wp:html block in a template part ships
- * untranslatable English. wp_body_open fires once, immediately after <body>, so
- * the link lands in the correct DOM position and there is exactly one of it —
- * the same single-instance guarantee the template-part approach gave, now with
- * a gettext-wrapped label. The target #main-content matches the <main> landmark
- * every template renders.
- *
- * Pillar 5 (Safe by Default): the keyboard skip link is on by default.
- */
-function render_skip_link(): void {
-	printf(
-		'<a class="skip-link screen-reader-text" href="#main-content">%s</a>',
-		esc_html__( 'Skip to content', 'ligature' )
-	);
-}
-add_action( 'wp_body_open', __NAMESPACE__ . '\\render_skip_link' );
