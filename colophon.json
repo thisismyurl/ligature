@@ -3,7 +3,7 @@
   "slug": "ligature",
   "namespace": "Ligature",
   "prefix": "ligature",
-  "version": "1.6165.0948",
+  "version": "1.6265.1630",
   "colophon_version": "1.6165.1327",
   "is_core": false,
   "overrides": {}

@@ -44,7 +44,7 @@
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|2xl","lineHeight":"1.1","letterSpacing":"-0.02em","textWrap":"balance"},"color":{"text":"var:preset|color|lig-ink"},"spacing":{"margin":{"top":"var:preset|spacing|4"}}}} -->
-			<h3 style="margin-top:var(--wp--preset--spacing--4);font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--2xl);line-height:1.1;letter-spacing:-0.02em;text-wrap:balance;color:var(--wp--preset--color--lig-ink)">Meridian Capital — Post-Merger Brand Relaunch</h3>
+			<h3 style="margin-top:var(--wp--preset--spacing--4);font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--2-xl);line-height:1.1;letter-spacing:-0.02em;text-wrap:balance;color:var(--wp--preset--color--lig-ink)">Meridian Capital — Post-Merger Brand Relaunch</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|5"}},"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|base","lineHeight":"1.7"},"color":{"text":"var:preset|color|lig-secondary"}}} -->

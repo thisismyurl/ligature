@@ -28,7 +28,7 @@
 			     edition-stable band rule (assets/css/skin.css), not per-edition
 			     tokens or cream rgba literals. -->
 			<!-- wp:heading {"level":2,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontStyle":"italic","fontWeight":"400","fontSize":"var:preset|font-size|2xl","letterSpacing":"-0.02em"}}} -->
-			<h2 style="font-family:var(--wp--preset--font-family--newsreader);font-style:italic;font-weight:400;font-size:var(--wp--preset--font-size--2xl);letter-spacing:-0.02em">Ligature</h2>
+			<h2 style="font-family:var(--wp--preset--font-family--newsreader);font-style:italic;font-weight:400;font-size:var(--wp--preset--font-size--2-xl);letter-spacing:-0.02em">Ligature</h2>
 			<!-- /wp:heading -->
 			<!-- wp:paragraph {"className":"ligature-footer-fine","style":{"spacing":{"margin":{"top":"var:preset|spacing|4"}},"typography":{"fontFamily":"var:preset|font-family|dm-sans","fontSize":"var:preset|font-size|base","lineHeight":"1.6"}}} -->
 			<p class="ligature-footer-fine" style="margin-top:var(--wp--preset--spacing--4);font-family:var(--wp--preset--font-family--dm-sans);font-size:var(--wp--preset--font-size--base);line-height:1.6">A typography and brand identity studio for names that need to last.</p>

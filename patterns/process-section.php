@@ -18,7 +18,7 @@
 		<p class="is-style-lig-overline">How We Work</p>
 		<!-- /wp:paragraph -->
 		<!-- wp:heading {"level":2,"style":{"typography":{"fontFamily":"var:preset|font-family|newsreader","fontWeight":"400","fontSize":"var:preset|font-size|3xl","letterSpacing":"-0.02em","textWrap":"balance"},"color":{"text":"var:preset|color|lig-ink"}}} -->
-		<h2 style="font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--3xl);letter-spacing:-0.02em;text-wrap:balance;color:var(--wp--preset--color--lig-ink)">Four stages. One coherent identity at the end.</h2>
+		<h2 style="font-family:var(--wp--preset--font-family--newsreader);font-weight:400;font-size:var(--wp--preset--font-size--3-xl);letter-spacing:-0.02em;text-wrap:balance;color:var(--wp--preset--color--lig-ink)">Four stages. One coherent identity at the end.</h2>
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
